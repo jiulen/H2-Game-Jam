@@ -47,7 +47,6 @@ public class CameraScript : MonoBehaviour
        {
             if(camera.WorldToScreenPoint(player.transform.position).y > Screen.height * 0.3f)
             {
-                Debug.Log("hi");
                 Vector3 playerPosition = player.transform.position;
                 transform.position = Vector3.Lerp(transform.position ,new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + initialOffset, Time.deltaTime);
                 offset = initialOffset;
