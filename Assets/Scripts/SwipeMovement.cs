@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SwipeMovement : MonoBehaviour
 {
+    public Animator animator;
+    AnimatorStateInfo animatorStateInfo;
+    float animationTime;
+
     private Vector2 startTouchPos, endTouchPos;
 
     private Touch touch;
@@ -20,27 +24,41 @@ public class SwipeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        animationTime = animatorStateInfo.normalizedTime;
+
         //Test on PC
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (animationTime > 1)
         {
-            moveCoroutine = Move(new Vector3(0, 0, 0.25f));
-            StartCoroutine(moveCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            moveCoroutine = Move(new Vector3(0, 0, -0.25f));
-            StartCoroutine(moveCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            moveCoroutine = Move(new Vector3(-0.25f, 0, 0));
-            StartCoroutine(moveCoroutine);
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            moveCoroutine = Move(new Vector3(0.25f, 0, 0));
-            StartCoroutine(moveCoroutine);
-        }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                //moveCoroutine = Move(new Vector3(0, 0, 0.25f));
+                //StartCoroutine(moveCoroutine);
+
+                animator.Play("MoveUp", -1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                //moveCoroutine = Move(new Vector3(0, 0, -0.25f));
+                //StartCoroutine(moveCoroutine);
+
+                animator.Play("MoveDown", -1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                //moveCoroutine = Move(new Vector3(-0.25f, 0, 0));
+                //StartCoroutine(moveCoroutine);
+
+                animator.Play("MoveLeft", -1, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                //moveCoroutine = Move(new Vector3(0.25f, 0, 0));   
+                //StartCoroutine(moveCoroutine);
+
+                animator.Play("MoveRight", -1, 0);
+            }
+        }        
 
         //Mobile controls
         if (Input.touchCount > 0)
@@ -53,7 +71,7 @@ public class SwipeMovement : MonoBehaviour
             startTouchPos = touch.position;
         }
 
-        if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && coroutineAllowed)
+        if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && animationTime > 1)
         {
             endTouchPos = touch.position;
 
@@ -61,28 +79,28 @@ public class SwipeMovement : MonoBehaviour
             {
                 if (endTouchPos.y > startTouchPos.y)
                 {
-                    moveCoroutine = Move(new Vector3(0, 0, 0.25f));
-                    StartCoroutine(moveCoroutine);
+                    animator.Play("MoveUp", -1, 0);
                 }
                 else if (endTouchPos.y < startTouchPos.y)
                 {
-                    moveCoroutine = Move(new Vector3(0, 0, -0.25f));
-                    StartCoroutine(moveCoroutine);
+                    animator.Play("MoveDown", -1, 0);
                 }
             }
             else if (Mathf.Abs(touch.deltaPosition.y) < Mathf.Abs(touch.deltaPosition.x))
             {
                 if (endTouchPos.x > startTouchPos.x)
                 {
-                    moveCoroutine = Move(new Vector3(0.25f, 0, 0));
-                    StartCoroutine(moveCoroutine);
+                    animator.Play("MoveRight", -1, 0);
                 }
                 else if (endTouchPos.x < startTouchPos.x)
                 {
-                    moveCoroutine = Move(new Vector3(-0.25f, 0, 0));
-                    StartCoroutine(moveCoroutine);
+                    animator.Play("MoveLeft", -1, 0);
                 }
-            }            
+            }        
+            else
+            {
+                animator.Play("MoveUp", -1, 0);
+            }
         }
     }
 
