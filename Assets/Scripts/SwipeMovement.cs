@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SwipeMovement : MonoBehaviour
 {
+    public static SwipeMovement instance;
+
     public Animator animator;
     AnimatorStateInfo animatorStateInfo;
-    float animationTime;
+    public float animationTime;
 
     private Vector2 startTouchPos, endTouchPos;
 
@@ -15,9 +17,17 @@ public class SwipeMovement : MonoBehaviour
     private IEnumerator moveCoroutine;
     private bool coroutineAllowed;
 
+    public string dir = " ";
     // Start is called before the first frame update
     void Start()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+            Destroy(this);
+
         coroutineAllowed = true;        
     }
 
@@ -30,12 +40,14 @@ public class SwipeMovement : MonoBehaviour
         //Test on PC
         if (animationTime > 1)
         {
+            dir = " ";
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 //moveCoroutine = Move(new Vector3(0, 0, 0.25f));
                 //StartCoroutine(moveCoroutine);
 
                 animator.Play("MoveUp", -1, 0);
+                dir = "MoveUp";
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -43,6 +55,7 @@ public class SwipeMovement : MonoBehaviour
                 //StartCoroutine(moveCoroutine);
 
                 animator.Play("MoveDown", -1, 0);
+                dir = "MoveDown";
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -50,6 +63,7 @@ public class SwipeMovement : MonoBehaviour
                 //StartCoroutine(moveCoroutine);
 
                 animator.Play("MoveLeft", -1, 0);
+                dir = "MoveLeft";
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -57,8 +71,10 @@ public class SwipeMovement : MonoBehaviour
                 //StartCoroutine(moveCoroutine);
 
                 animator.Play("MoveRight", -1, 0);
+                dir = "MoveRight";
             }
-        }        
+        }
+
 
         //Mobile controls
         if (Input.touchCount > 0)

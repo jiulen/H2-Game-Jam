@@ -37,36 +37,40 @@ public class CameraScript : MonoBehaviour
         playerMovement = player.GetComponent<SwipeMovement>();
         canMove = true;
         // TODO this position and rotation is baked, extract it
-        initialOffset = new Vector3(2.5f, 10.0f, -7.5f);
+        initialOffset = transform.position;
         offset = initialOffset;
     }
 
     void Update()
     {
+       if(moving)
+       {
+            if(camera.WorldToScreenPoint(player.transform.position).y > Screen.height * 0.3f)
+            {
+                Debug.Log("hi");
+                Vector3 playerPosition = player.transform.position;
+                transform.position = Vector3.Lerp(transform.position ,new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + initialOffset, Time.deltaTime);
+                offset = initialOffset;
+            }
+            else
+            {
+                Vector3 playerPosition = player.transform.position;
+                transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + offset, Time.deltaTime);
 
-        if (camera.WorldToScreenPoint(player.transform.position).y > Screen.height * 0.3)
-        {
-            Debug.Log("Player is above the middle of the screen.");
+                // Increase z over time if moving.
+                offset.z += speedIncrementZ * 1.5f * Time.deltaTime;
 
-            movePos = player.transform.position - offset;
-            canMove = false;
-            transform.position = Vector3.Lerp(transform.position, new Vector3(movePos.x, 0, movePos.z) + offset, 2 * Time.deltaTime);
+                // Increase/decrease z when player is moving south/north.
+                if (SwipeMovement.instance.animationTime < 1)
+                {
+                    if (SwipeMovement.instance.dir == "MoveUp")
+                    {
+                        offset.z -= speedOffsetZ * Time.deltaTime;
+                    }
+                }
+            }
+           
         }
-        if (canMove)
-        {
-            movePos = Vector3.zero;
-            transform.position += new Vector3(0,0,speedIncrementZ * Time.deltaTime);
-        }
-
-
-        
-        //Debug.Log(Mathf.Abs(camera.WorldToScreenPoint(player.transform.position).y - (Screen.height * 0.3f)));
-        if(Mathf.Abs(camera.WorldToScreenPoint(player.transform.position).y - (Screen.height * 0.3f)) < 0.1f)
-        {
-            canMove = true;
-        }
-        //if (Vector3.Distance(transform.position, new Vector3(movePos.x, 0, Mathf.Max(minZ, movePos.z)) + offset) < 0.5f)
-        //    transform.position = new Vector3(movePos.x, 0, Mathf.Max(minZ, movePos.z)) + offset;
     }
 
 
