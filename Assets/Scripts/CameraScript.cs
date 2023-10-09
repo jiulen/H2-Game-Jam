@@ -69,7 +69,6 @@ public class CameraScript : MonoBehaviour
                 }
             }
             minZ = Mathf.Max(minZ, transform.position.z);
-
         }
     }
 

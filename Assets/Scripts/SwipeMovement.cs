@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SwipeMovement : MonoBehaviour
 {
     public static SwipeMovement instance;
 
+    public TMP_Text Score;
     public Animator animator;
     AnimatorStateInfo animatorStateInfo;
     public float animationTime;
@@ -17,6 +19,8 @@ public class SwipeMovement : MonoBehaviour
     private IEnumerator moveCoroutine;
     private bool coroutineAllowed;
 
+    public int score = 0;
+    private int highestPos = 0;
     public string dir = " ";
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,10 @@ public class SwipeMovement : MonoBehaviour
         coroutineAllowed = true;        
     }
 
+    private void Awake()
+    {
+        highestPos = (int)transform.position.z;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -38,9 +46,14 @@ public class SwipeMovement : MonoBehaviour
         animationTime = animatorStateInfo.normalizedTime;
 
         //Test on PC
+        // check if can move in the first place
+
         if (animationTime > 1)
         {
             dir = " ";
+            highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z));
+            score = highestPos;
+            Score.text = score.ToString();
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 //moveCoroutine = Move(new Vector3(0, 0, 0.25f));
