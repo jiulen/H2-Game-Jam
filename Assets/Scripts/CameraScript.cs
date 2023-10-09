@@ -57,7 +57,7 @@ public class CameraScript : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + offset, Time.deltaTime);
 
                 // Increase z over time if moving.
-                offset.z += speedIncrementZ * Time.deltaTime * 0.5f;
+                offset.z += speedIncrementZ * Time.deltaTime * 0.2f;
 
                 //// Increase/decrease z when player is moving south/north.
                 if (SwipeMovement.instance.animationTime < 1)
