@@ -19,9 +19,11 @@ public class SwipeMovement : MonoBehaviour
     private IEnumerator moveCoroutine;
     private bool coroutineAllowed;
 
-    public int score = 0;
-    private int highestPos = 0;
-    public string dir = " ";
+    public int score;
+    private int highestPos;
+    public string dir;
+
+    public bool alive;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,10 @@ public class SwipeMovement : MonoBehaviour
     private void Awake()
     {
         highestPos = (int)transform.position.z;
+        alive = true;
+        score = 0;
+        highestPos = 0;
+        dir = " ";
     }
     // Update is called once per frame
     void Update()
@@ -99,7 +105,7 @@ public class SwipeMovement : MonoBehaviour
         {
             startTouchPos = touch.position;
         }
-
+        
         if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && animationTime > 1)
         {
             endTouchPos = touch.position;
