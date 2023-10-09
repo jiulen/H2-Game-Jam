@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.GetComponent<SwipeMovement>();
         canMove = true;
-        // TODO this position and rotation is baked, extract it
+
         initialOffset = transform.position;
         offset = initialOffset;
     }
@@ -57,18 +57,19 @@ public class CameraScript : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + offset, Time.deltaTime);
 
                 // Increase z over time if moving.
-                offset.z += speedIncrementZ * 1.5f * Time.deltaTime;
+                offset.z += speedIncrementZ * Time.deltaTime * 0.5f;
 
-                // Increase/decrease z when player is moving south/north.
+                //// Increase/decrease z when player is moving south/north.
                 if (SwipeMovement.instance.animationTime < 1)
                 {
                     if (SwipeMovement.instance.dir == "MoveUp")
                     {
-                        offset.z -= speedOffsetZ * Time.deltaTime;
+                        offset.z -= speedOffsetZ * Time.deltaTime * 0.5f;
                     }
                 }
             }
-           
+            minZ = Mathf.Max(minZ, transform.position.z);
+
         }
     }
 
