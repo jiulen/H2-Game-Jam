@@ -12,6 +12,8 @@ public class SwipeMovement : MonoBehaviour
     AnimatorStateInfo animatorStateInfo;
     public float animationTime;
 
+    public Animator parentAnimator;
+
     private Vector2 startTouchPos, endTouchPos;
 
     private Touch touch;
@@ -61,7 +63,6 @@ public class SwipeMovement : MonoBehaviour
             PlayerScript.instance.score = highestPos;
             Score.text = PlayerScript.instance.score.ToString();
             isHopping = false;
-            animator.applyRootMotion = true;
 
             RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -71,8 +72,7 @@ public class SwipeMovement : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
                 {
                     //squish
-                    animator.applyRootMotion = true;
-                    animator.Play("MoveFail", -1, 0);
+                    parentAnimator.Play("MoveFailParent", -1, 0);
                 }
                 else
                 {
@@ -87,7 +87,7 @@ public class SwipeMovement : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
                 {
                     //squish
-                    animator.Play("MoveFail", -1, 0);
+                    parentAnimator.Play("MoveFailParent", -1, 0);
                 }
                 else
                 {
@@ -102,7 +102,7 @@ public class SwipeMovement : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
                 {
                     //squish
-                    animator.Play("MoveFail", -1, 0);
+                    parentAnimator.Play("MoveFailParent", -1, 0);
                 }
                 else
                 {
@@ -117,7 +117,7 @@ public class SwipeMovement : MonoBehaviour
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
                 {
                     //squish
-                    animator.Play("MoveFail", -1, 0);
+                    parentAnimator.Play("MoveFailParent", -1, 0);
                 }
                 else
                 {
@@ -154,7 +154,7 @@ public class SwipeMovement : MonoBehaviour
                     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
                     {
                         //squish
-                        animator.Play("MoveFail", -1, 0);
+                        parentAnimator.Play("MoveFailParent", -1, 0);
                     }
                     else
                     {
@@ -169,7 +169,7 @@ public class SwipeMovement : MonoBehaviour
                     if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
                     {
                         //squish
-                        animator.Play("MoveFail", -1, 0);
+                        parentAnimator.Play("MoveFailParent", -1, 0);
                     }
                     else
                     {
@@ -187,7 +187,7 @@ public class SwipeMovement : MonoBehaviour
                     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
                     {
                         //squish
-                        animator.Play("MoveFail", -1, 0);
+                        parentAnimator.Play("MoveFailParent", -1, 0);
                     }
                     else
                     {
@@ -202,7 +202,7 @@ public class SwipeMovement : MonoBehaviour
                     if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
                     {
                         //squish
-                        animator.Play("MoveFail", -1, 0);
+                        parentAnimator.Play("MoveFailParent", -1, 0);
                     }
                     else
                     {
