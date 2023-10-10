@@ -7,6 +7,7 @@ public class SwipeMovement : MonoBehaviour
 {
     public static SwipeMovement instance;
 
+    public GameObject model;
     public TMP_Text Score;
     public Animator animator;
     AnimatorStateInfo animatorStateInfo;
@@ -138,15 +139,19 @@ public class SwipeMovement : MonoBehaviour
         {
             case ("MoveUp"):
                 moveDirVec = Vector3.forward;
+                model.transform.rotation = Quaternion.Euler(0, 0, 0);
                 break;
             case ("MoveDown"):
                 moveDirVec = -Vector3.forward;
+                model.transform.rotation = Quaternion.Euler(0, 180, 0);
                 break;
             case ("MoveLeft"):
                 moveDirVec = -Vector3.right;
+                model.transform.rotation = Quaternion.Euler(0, 270, 0);
                 break;
             case ("MoveRight"):
                 moveDirVec = Vector3.right;
+                model.transform.rotation = Quaternion.Euler(0, 90, 0);
                 break;
         }
 

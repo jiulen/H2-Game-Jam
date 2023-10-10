@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public enum StateType
 {
     menu,
@@ -124,6 +124,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Refreseh()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void OnApplicationQuit()
     {
         instance = null;
