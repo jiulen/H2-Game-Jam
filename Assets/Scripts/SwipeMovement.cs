@@ -21,6 +21,8 @@ public class SwipeMovement : MonoBehaviour
 
     public bool isHopping;
 
+    public LayerMask obstacleLayerMask;
+
     //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
@@ -57,25 +59,55 @@ public class SwipeMovement : MonoBehaviour
             PlayerScript.instance.score = highestPos;
             Score.text = PlayerScript.instance.score.ToString();
             isHopping = false;
+
+            RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                animator.Play("MoveUp", -1, 0);
-                dir = "MoveUp";
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
+                {
+                    //squish
+                }
+                else
+                {
+                    animator.Play("MoveUp", -1, 0);
+                    dir = "MoveUp";
+                }
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                animator.Play("MoveDown", -1, 0);
-                dir = "MoveDown";
+                if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
+                {
+                    //squish
+                }
+                else
+                {
+                    animator.Play("MoveDown", -1, 0);
+                    dir = "MoveDown";
+                }
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                animator.Play("MoveLeft", -1, 0);
-                dir = "MoveLeft";
+                if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
+                {
+                    //squish
+                }
+                else
+                {
+                    animator.Play("MoveLeft", -1, 0);
+                    dir = "MoveLeft";
+                }
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                animator.Play("MoveRight", -1, 0);
-                dir = "MoveRight";
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
+                {
+                    //squish
+                }
+                else
+                {
+                    animator.Play("MoveRight", -1, 0);
+                    dir = "MoveRight";
+                }
             }
         }
         else if (PlayerScript.instance.isAlive)
@@ -96,27 +128,59 @@ public class SwipeMovement : MonoBehaviour
         if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
         {
             endTouchPos = touch.position;
-
+            RaycastHit hit;
             if (Mathf.Abs(touch.deltaPosition.y) > Mathf.Abs(touch.deltaPosition.x))
             {
                 if (endTouchPos.y > startTouchPos.y)
                 {
-                    animator.Play("MoveUp", -1, 0);
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
+                    {
+                        //squish
+                    }
+                    else
+                    {
+                        animator.Play("MoveUp", -1, 0);
+                        dir = "MoveUp";
+                    }
                 }
                 else if (endTouchPos.y < startTouchPos.y)
                 {
-                    animator.Play("MoveDown", -1, 0);
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
+                    {
+                        //squish
+                    }
+                    else
+                    {
+                        animator.Play("MoveDown", -1, 0);
+                        dir = "MoveDown";
+                    }
                 }
             }
             else if (Mathf.Abs(touch.deltaPosition.y) < Mathf.Abs(touch.deltaPosition.x))
             {
                 if (endTouchPos.x > startTouchPos.x)
                 {
-                    animator.Play("MoveRight", -1, 0);
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
+                    {
+                        //squish
+                    }
+                    else
+                    {
+                        animator.Play("MoveRight", -1, 0);
+                        dir = "MoveRight";
+                    }
                 }
                 else if (endTouchPos.x < startTouchPos.x)
                 {
-                    animator.Play("MoveLeft", -1, 0);
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
+                    {
+                        //squish
+                    }
+                    else
+                    {
+                        animator.Play("MoveLeft", -1, 0);
+                        dir = "MoveLeft";
+                    }
                 }
             }        
             else
