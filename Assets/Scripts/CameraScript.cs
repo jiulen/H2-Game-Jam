@@ -23,15 +23,17 @@ public class CameraScript : MonoBehaviour
     Vector3 movePos;
     void Start()
     {
+
+    }
+    void Awake()
+    {
         if (!instance)
         {
             instance = this;
         }
         else
             Destroy(this);
-    }
-    void Awake()
-    {
+
         camera = gameObject.GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerMovement = player.GetComponent<SwipeMovement>();

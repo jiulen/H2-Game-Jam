@@ -34,7 +34,12 @@ public class GameManager : MonoBehaviour
             Destroy(this);
 
         SetGameState(StateType.menu);
-        
+    }
+    private void Awake()
+    {
+
+
+ 
     }
 
     // Update is called once per frame

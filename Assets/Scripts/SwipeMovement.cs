@@ -16,14 +16,12 @@ public class SwipeMovement : MonoBehaviour
 
     private Touch touch;
 
-    private IEnumerator moveCoroutine;
-    private bool coroutineAllowed;
-
-    public int score;
     private int highestPos;
     public string dir;
 
-    public bool alive;
+    public bool isHopping;
+
+    //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,18 +30,16 @@ public class SwipeMovement : MonoBehaviour
             instance = this;
         }
         else
-            Destroy(this);
-
-        coroutineAllowed = true;        
+            Destroy(this);      
     }
 
     private void Awake()
     {
         highestPos = (int)transform.position.z;
-        alive = true;
-        score = 0;
+
         highestPos = 0;
         dir = " ";
+        isHopping = false;
     }
     // Update is called once per frame
     void Update()
@@ -54,45 +50,36 @@ public class SwipeMovement : MonoBehaviour
         //Test on PC
         // check if can move in the first place
 
-        if (animationTime > 1)
+        if (animationTime > 1 && PlayerScript.instance.isAlive)
         {
             dir = " ";
             highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z));
-            score = highestPos;
-            Score.text = score.ToString();
+            PlayerScript.instance.score = highestPos;
+            Score.text = PlayerScript.instance.score.ToString();
+            isHopping = false;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                //moveCoroutine = Move(new Vector3(0, 0, 0.25f));
-                //StartCoroutine(moveCoroutine);
-
                 animator.Play("MoveUp", -1, 0);
                 dir = "MoveUp";
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                //moveCoroutine = Move(new Vector3(0, 0, -0.25f));
-                //StartCoroutine(moveCoroutine);
-
                 animator.Play("MoveDown", -1, 0);
                 dir = "MoveDown";
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                //moveCoroutine = Move(new Vector3(-0.25f, 0, 0));
-                //StartCoroutine(moveCoroutine);
-
                 animator.Play("MoveLeft", -1, 0);
                 dir = "MoveLeft";
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                //moveCoroutine = Move(new Vector3(0.25f, 0, 0));   
-                //StartCoroutine(moveCoroutine);
-
                 animator.Play("MoveRight", -1, 0);
                 dir = "MoveRight";
             }
         }
+        else if (PlayerScript.instance.isAlive)
+            isHopping = true;
 
 
         //Mobile controls
@@ -106,7 +93,7 @@ public class SwipeMovement : MonoBehaviour
             startTouchPos = touch.position;
         }
         
-        if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && animationTime > 1)
+        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
         {
             endTouchPos = touch.position;
 
@@ -137,20 +124,5 @@ public class SwipeMovement : MonoBehaviour
                 animator.Play("MoveUp", -1, 0);
             }
         }
-    }
-
-    private IEnumerator Move(Vector3 direction) //Move 4 times
-    {
-        coroutineAllowed = false;
-
-        for (int i = 0; i < 3; ++i)
-        {
-            transform.Translate(direction);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        transform.Translate(direction);
-
-        coroutineAllowed = true;
     }
 }
