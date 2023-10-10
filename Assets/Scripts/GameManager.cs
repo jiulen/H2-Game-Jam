@@ -19,10 +19,12 @@ public class GameManager : MonoBehaviour
     public bool resetPLayer;
     public int highscore;
     public int coins;
-
-    public GameObject GameUI;
     public TMP_Text coinsText;
+
     public GameObject MenuUI;
+    public GameObject GameUI;
+    public GameObject DeathUI;
+
 
     private Touch touch;
 
@@ -87,7 +89,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SetGameState(StateType newState)
+    public void SetGameState(StateType newState)
     {
         state = newState;
 
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
                 {
                     MenuUI.SetActive(true);
                     GameUI.SetActive(false);
+                    DeathUI.SetActive(false);
                     CameraScript.instance.moving = false;
                     break;
                 }
@@ -111,6 +114,9 @@ public class GameManager : MonoBehaviour
 
             case StateType.death:
                 {
+                    GameUI.SetActive(false);
+                    DeathUI.SetActive(true);
+                    CameraScript.instance.moving = false;
                     break;
                 }
             default:

@@ -29,4 +29,12 @@ public class Obstacle : MonoBehaviour
     {
         return obstacleType;
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag != "Player")
+            return;
+
+        GameManager.instance.SetGameState(StateType.death);
+    }
 }

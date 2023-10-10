@@ -29,10 +29,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.state != StateType.gameplay)
+            return;
+
         if (SwipeMovement.instance.isHopping)
         {
             player.GetComponent<Rigidbody>().isKinematic = true;
-            
         }
         else
         {
