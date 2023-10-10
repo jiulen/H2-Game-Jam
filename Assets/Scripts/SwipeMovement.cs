@@ -67,63 +67,19 @@ public class SwipeMovement : MonoBehaviour
             RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                //rotate to dir
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
-                {
-                    //squish
-                    parentAnimator.Play("MoveFailParent", -1, 0);
-                }
-                else
-                {
-                    animator.Play("MoveUp", -1, 0);
-                    dir = "MoveUp";
-                }
+                Move("MoveUp");
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                //rotate to dir
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
-                {
-                    //squish
-                    parentAnimator.Play("MoveFailParent", -1, 0);
-                }
-                else
-                {
-                    animator.Play("MoveDown", -1, 0);
-                    dir = "MoveDown";
-                }
+                Move("MoveDown");
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                //rotate to dir
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
-                {
-                    //squish
-                    parentAnimator.Play("MoveFailParent", -1, 0);
-                }
-                else
-                {
-                    animator.Play("MoveLeft", -1, 0);
-                    dir = "MoveLeft";
-                }
+                Move("MoveLeft");
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                //rotate to dir
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
-                {
-                    //squish
-                    parentAnimator.Play("MoveFailParent", -1, 0);
-                }
-                else
-                {
-                    animator.Play("MoveRight", -1, 0);
-                    dir = "MoveRight";
-                }
+                Move("MoveRight");
             }
         }
         else if (PlayerScript.instance.isAlive)
@@ -149,83 +105,63 @@ public class SwipeMovement : MonoBehaviour
             {
                 if (endTouchPos.y > startTouchPos.y)
                 {
-                    //rotate to dir
-
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
-                    {
-                        //squish
-                        parentAnimator.Play("MoveFailParent", -1, 0);
-                    }
-                    else
-                    {
-                        animator.Play("MoveUp", -1, 0);
-                        dir = "MoveUp";
-                    }
+                    Move("MoveUp");
                 }
                 else if (endTouchPos.y < startTouchPos.y)
                 {
-                    //rotate to dir
-
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
-                    {
-                        //squish
-                        parentAnimator.Play("MoveFailParent", -1, 0);
-                    }
-                    else
-                    {
-                        animator.Play("MoveDown", -1, 0);
-                        dir = "MoveDown";
-                    }
+                    Move("MoveDown");
                 }
             }
             else if (Mathf.Abs(touch.deltaPosition.y) < Mathf.Abs(touch.deltaPosition.x))
             {
                 if (endTouchPos.x > startTouchPos.x)
                 {
-                    //rotate to dir
-
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
-                    {
-                        //squish
-                        parentAnimator.Play("MoveFailParent", -1, 0);
-                    }
-                    else
-                    {
-                        animator.Play("MoveRight", -1, 0);
-                        dir = "MoveRight";
-                    }
+                    Move("MoveRight");
                 }
                 else if (endTouchPos.x < startTouchPos.x)
                 {
-                    //rotate to dir
-
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
-                    {
-                        //squish
-                        parentAnimator.Play("MoveFailParent", -1, 0);
-                    }
-                    else
-                    {
-                        animator.Play("MoveLeft", -1, 0);
-                        dir = "MoveLeft";
-                    }
+                    Move("MoveLeft");
                 }
             }        
             else
             {
-                //rotate to dir
-
-                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
-                {
-                    //squish
-                    animator.Play("MoveFail", -1, 0);
-                }
-                else
-                {
-                    animator.Play("MoveUp", -1, 0);
-                    dir = "MoveUp";
-                }
+                Move("MoveUp");
             }
+        }
+    }
+
+    void Move(string moveDirStr)
+    {
+        //get direction as vector3
+        Vector3 moveDirVec = Vector3.zero;
+        switch (moveDirStr)
+        {
+            case ("MoveUp"):
+                moveDirVec = Vector3.forward;
+                break;
+            case ("MoveDown"):
+                moveDirVec = -Vector3.forward;
+                break;
+            case ("MoveLeft"):
+                moveDirVec = -Vector3.right;
+                break;
+            case ("MoveRight"):
+                moveDirVec = Vector3.right;
+                break;
+        }
+
+        //rotate to face movement direction
+
+        //try move
+        if (Physics.Raycast(transform.position, transform.TransformDirection(moveDirVec), out RaycastHit hit, 1, obstacleLayerMask))
+        {
+            //Walk into wall
+            parentAnimator.Play("MoveFailParent", -1, 0);
+        }
+        else
+        {
+            animator.Play(moveDirStr, -1, 0);
+            dir = moveDirStr;
         }
     }
 }
