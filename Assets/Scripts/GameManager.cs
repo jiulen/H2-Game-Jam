@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum StateType
 {
@@ -17,8 +18,10 @@ public class GameManager : MonoBehaviour
     public StateType state;
     public bool resetPLayer;
     public int highscore;
+    public int coins;
 
     public GameObject GameUI;
+    public TMP_Text coinsText;
     public GameObject MenuUI;
 
     private Touch touch;
@@ -33,13 +36,31 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
 
+        if (PlayerPrefs.HasKey("highscore"))
+        {
+            highscore = PlayerPrefs.GetInt("highscore", highscore);
+        }
+        else
+        {
+            highscore = 0;
+            PlayerPrefs.SetInt("highscore", highscore);
+        }
+
+        if (PlayerPrefs.HasKey("coins"))
+        {
+            coins = PlayerPrefs.GetInt("coins", coins);
+        }
+        else
+        {
+            coins = 0;
+            PlayerPrefs.SetInt("coins", coins);
+        }
+
         SetGameState(StateType.menu);
     }
     private void Awake()
     {
 
-
- 
     }
 
     // Update is called once per frame
