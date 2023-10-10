@@ -46,6 +46,8 @@ public class SwipeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.localScale.y != 1) Debug.Log(transform.localScale.y);
+
         animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         animationTime = animatorStateInfo.normalizedTime;
 
@@ -59,13 +61,18 @@ public class SwipeMovement : MonoBehaviour
             PlayerScript.instance.score = highestPos;
             Score.text = PlayerScript.instance.score.ToString();
             isHopping = false;
+            animator.applyRootMotion = true;
 
             RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                //rotate to dir
+
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
                 {
                     //squish
+                    animator.applyRootMotion = true;
+                    animator.Play("MoveFail", -1, 0);
                 }
                 else
                 {
@@ -75,9 +82,12 @@ public class SwipeMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                //rotate to dir
+
                 if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
                 {
                     //squish
+                    animator.Play("MoveFail", -1, 0);
                 }
                 else
                 {
@@ -87,9 +97,12 @@ public class SwipeMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                //rotate to dir
+
                 if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
                 {
                     //squish
+                    animator.Play("MoveFail", -1, 0);
                 }
                 else
                 {
@@ -99,9 +112,12 @@ public class SwipeMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                //rotate to dir
+
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
                 {
                     //squish
+                    animator.Play("MoveFail", -1, 0);
                 }
                 else
                 {
@@ -133,9 +149,12 @@ public class SwipeMovement : MonoBehaviour
             {
                 if (endTouchPos.y > startTouchPos.y)
                 {
+                    //rotate to dir
+
                     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
                     {
                         //squish
+                        animator.Play("MoveFail", -1, 0);
                     }
                     else
                     {
@@ -145,9 +164,12 @@ public class SwipeMovement : MonoBehaviour
                 }
                 else if (endTouchPos.y < startTouchPos.y)
                 {
+                    //rotate to dir
+
                     if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.forward), out hit, 1, obstacleLayerMask))
                     {
                         //squish
+                        animator.Play("MoveFail", -1, 0);
                     }
                     else
                     {
@@ -160,9 +182,12 @@ public class SwipeMovement : MonoBehaviour
             {
                 if (endTouchPos.x > startTouchPos.x)
                 {
+                    //rotate to dir
+
                     if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right), out hit, 1, obstacleLayerMask))
                     {
                         //squish
+                        animator.Play("MoveFail", -1, 0);
                     }
                     else
                     {
@@ -172,9 +197,12 @@ public class SwipeMovement : MonoBehaviour
                 }
                 else if (endTouchPos.x < startTouchPos.x)
                 {
+                    //rotate to dir
+
                     if (Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.right), out hit, 1, obstacleLayerMask))
                     {
                         //squish
+                        animator.Play("MoveFail", -1, 0);
                     }
                     else
                     {
@@ -185,7 +213,18 @@ public class SwipeMovement : MonoBehaviour
             }        
             else
             {
-                animator.Play("MoveUp", -1, 0);
+                //rotate to dir
+
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 1, obstacleLayerMask))
+                {
+                    //squish
+                    animator.Play("MoveFail", -1, 0);
+                }
+                else
+                {
+                    animator.Play("MoveUp", -1, 0);
+                    dir = "MoveUp";
+                }
             }
         }
     }
