@@ -26,6 +26,7 @@ public class SwipeMovement : MonoBehaviour
 
     public LayerMask obstacleLayerMask;
 
+    private Rigidbody rbody;
     //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,7 @@ public class SwipeMovement : MonoBehaviour
         highestPos = 0;
         dir = " ";
         isHopping = false;
+        rbody = gameObject.GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
@@ -63,7 +65,16 @@ public class SwipeMovement : MonoBehaviour
             highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z));
             PlayerScript.instance.score = highestPos;
             Score.text = PlayerScript.instance.score.ToString();
+            //if(isHopping)
+            //{
+            //    rbody.velocity = Vector3.zero;
+            //    rbody.inertiaTensor = new Vector3(1, 1, 1);
+            //    Debug.Log("insane");
+            //}
+
             isHopping = false;
+
+            
 
             RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -133,6 +144,8 @@ public class SwipeMovement : MonoBehaviour
 
     void Move(string moveDirStr)
     {
+        if (!IsGrounded())
+            return;
         //get direction as vector3
         Vector3 moveDirVec = Vector3.zero;
         switch (moveDirStr)
@@ -168,5 +181,14 @@ public class SwipeMovement : MonoBehaviour
             animator.Play(moveDirStr, -1, 0);
             dir = moveDirStr;
         }
+        
+    }
+
+    bool IsGrounded()
+    {
+        Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out RaycastHit hit);
+        if (hit.collider.tag != "Water")
+            return true;
+        return false;
     }
 }

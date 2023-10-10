@@ -7,12 +7,13 @@ public class Obstacle : MonoBehaviour
     public enum ObstacleType
     {
         wall,
+        water,
         collidable
     }
 
     [SerializeField] ObstacleType obstacleType;
     public Animator animator;
-
+    public GameObject splashPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +37,14 @@ public class Obstacle : MonoBehaviour
             return;
 
         GameManager.instance.SetGameState(StateType.death);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        GameObject go = Instantiate(splashPrefab, other.transform.position, Quaternion.Euler(-90, 0, 0));
+        Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+
+        if (other.tag == "Player")
+            GameManager.instance.SetGameState(StateType.death);
     }
 }
