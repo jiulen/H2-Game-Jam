@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
 
     public void PlayerWalkDie(Transform playerTransform, Transform obstacleTransform) //For when player walk into obstacle that kil
     {
-        if (!isAlive)
+        if (!isAlive || !SwipeMovement.instance.isHopping)
             return;
 
         isAlive = false;
