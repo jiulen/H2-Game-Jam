@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public Toggle SettingsButton;
     public Animator SettingsAnimator;
+    public Sprite[] settingSprites;
 
     public Toggle MuteToggle;
     public Sprite[] mutedSprites;
@@ -192,10 +193,24 @@ public class GameManager : MonoBehaviour
     {
         if(!SettingsButton.isOn)
         {
+            SettingsButton.GetComponent<Image>().sprite = settingSprites[2];
+
+            SpriteState tempState = SettingsButton.spriteState;
+            tempState.pressedSprite = settingSprites[3];
+            SettingsButton.spriteState = tempState;
+
             SettingsAnimator.Play("CloseSettings", -1, 0);
         }
         else
+        {
+            SettingsButton.GetComponent<Image>().sprite = settingSprites[0];
+
+            SpriteState tempState = SettingsButton.spriteState;
+            tempState.pressedSprite = settingSprites[1];
+            SettingsButton.spriteState = tempState;
+
             SettingsAnimator.Play("OpenSettings", -1, 0);
+        }
     }
 
     public void ToggleMute()
