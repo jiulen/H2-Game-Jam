@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public enum StateType
 {
     menu,
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public GameObject GameUI;
     public GameObject DeathUI;
 
+    public Toggle SettingsButton;
+    public Animator SettingsAnimator;
 
     private Touch touch;
 
@@ -65,28 +68,33 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void StartGame()
+    {
+        SetGameState(StateType.gameplay);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            touch = Input.GetTouch(0);
-        }
+        //if (Input.touchCount > 0)
+        //{
+        //    touch = Input.GetTouch(0);
+        //}
 
-        // for mobile
-        if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && state == StateType.menu)
-        {
-            if (Mathf.Abs(touch.deltaPosition.y) == Mathf.Abs(touch.deltaPosition.x))
-            {
-                SetGameState(StateType.gameplay);
-            }
-        }
+        //// for mobile
+        //if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && state == StateType.menu)
+        //{
+        //    if (Mathf.Abs(touch.deltaPosition.y) == Mathf.Abs(touch.deltaPosition.x))
+        //    {
+        //        SetGameState(StateType.gameplay);
+        //    }
+        //}
 
-        //for pc
-        if (Input.GetKeyDown(KeyCode.Mouse0) && state == StateType.menu)
-        {
-            SetGameState(StateType.gameplay);
-        }
+        ////for pc
+        //if (Input.GetKeyDown(KeyCode.Mouse0) && state == StateType.menu)
+        //{
+        //    SetGameState(StateType.gameplay);
+        //}
     }
 
     public void SetGameState(StateType newState)
@@ -131,5 +139,15 @@ public class GameManager : MonoBehaviour
     public void OnApplicationQuit()
     {
         instance = null;
+    }
+
+    public void ToggleSettings()
+    {
+        if(!SettingsButton.isOn)
+        {
+            SettingsAnimator.Play("CloseSettings", -1, 0);
+        }
+        else
+            SettingsAnimator.Play("OpenSettings", -1, 0);
     }
 }
