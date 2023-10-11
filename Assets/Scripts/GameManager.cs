@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     public GameObject MenuUI;
     public GameObject GameUI;
     public GameObject DeathUI;
+    public GameObject GachaInvenSelectionUI;
+    public GameObject GachaUI;
+    public GameObject InvenUI;
 
     public Toggle SettingsButton;
     public Animator SettingsAnimator;
@@ -60,7 +63,7 @@ public class GameManager : MonoBehaviour
             highscore = 0;
             PlayerPrefs.SetInt("highscore", highscore);
         }
-        highscoreText.text = "HI " + highscore.ToString();
+        //highscoreText.text = "HI " + highscore.ToString();
 
         if (PlayerPrefs.HasKey("coins"))
         {
@@ -271,5 +274,20 @@ public class GameManager : MonoBehaviour
 
             PlayerPrefs.SetInt("shadow", 0); //0 is no shadow, 1 is have shadow
         }
+    }
+
+    public void OpenGachaInventorySelection(bool open)
+    {
+        GachaInvenSelectionUI.SetActive(open);
+    }
+
+    public void OpenGacha(bool open)
+    {
+        GachaUI.SetActive(open);
+    }
+
+    public void OpenInventory(bool open)
+    {
+        InvenUI.SetActive(open);
     }
 }
