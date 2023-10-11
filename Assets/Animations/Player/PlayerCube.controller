@@ -57,7 +57,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SquishFront
-  m_Speed: 1000
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -207,7 +207,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SquishBack
-  m_Speed: 1000
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -304,7 +304,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SquishRight
-  m_Speed: 1000
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -427,7 +427,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SquishLeft
-  m_Speed: 1000
+  m_Speed: 20
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
