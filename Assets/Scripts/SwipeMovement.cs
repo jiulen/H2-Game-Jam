@@ -13,8 +13,8 @@ public class SwipeMovement : MonoBehaviour
     AnimatorStateInfo animatorStateInfo;
     public float animationTime;
 
+    public Transform parentTransform;
     public Animator parentAnimator;
-    public Animator parentParentAnimator;
 
     private Vector2 startTouchPos, endTouchPos;
 
@@ -57,8 +57,8 @@ public class SwipeMovement : MonoBehaviour
         {
             PlayerScript.instance.isAlive = false;
 
-            parentParentAnimator.Play("SquishFront", -1, 0);
-            parentAnimator.Play("SquishFront", -1, 0);
+            transform.localScale = new Vector3(1, 1, 0.1f);
+            animator.Play("SquishFront", -1, 0);
         }
 
         if (transform.localScale.y != 1) Debug.Log(transform.localScale.y);
