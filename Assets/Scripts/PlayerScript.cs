@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour
     private GameObject player;
     public int score;
     public bool isAlive;
-  
+
     void Start()
     {
         if (!instance)
@@ -29,11 +29,6 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            PlayerWalkDie();
-        }
-
         if (GameManager.instance.state != StateType.gameplay)
             return;
 
@@ -55,11 +50,17 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void PlayerWalkDie() //For when player walk into obstacle that kil
+    public void PlayerWalkDie(Transform playerTransform, Transform obstacleTransform) //For when player walk into obstacle that kil
     {
+        if (!isAlive)
+            return;
+
         isAlive = false;
 
-        Debug.Log(player.GetComponent<Rigidbody>().isKinematic);
+        playerTransform.SetParent(obstacleTransform, true);
+
+        player.GetComponent<Rigidbody>().isKinematic = false;
+        player.GetComponent<Rigidbody>().useGravity = false;
 
         switch (SwipeMovement.instance.curRotation)
         {
