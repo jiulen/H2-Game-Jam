@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public Toggle SettingsButton;
     public Animator SettingsAnimator;
+    public Sprite[] settingSprites;
 
     public Toggle MuteToggle;
     public Sprite[] mutedSprites;
@@ -83,6 +84,19 @@ public class GameManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("mute", 1); //0 is muted, 1 is not muted
+        }
+
+        if (PlayerPrefs.HasKey("shadow"))
+        {
+            if (PlayerPrefs.GetInt("shadow", 0) == 0)
+            {
+                PowerSaveToggle.isOn = true;
+                TogglePowerSaving();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("shadow", 1); //0 is no shadow, 1 is have shadow
         }
 
         SetGameState(StateType.menu);
@@ -181,10 +195,24 @@ public class GameManager : MonoBehaviour
     {
         if(!SettingsButton.isOn)
         {
+            SettingsButton.GetComponent<Image>().sprite = settingSprites[2];
+
+            SpriteState tempState = SettingsButton.spriteState;
+            tempState.pressedSprite = settingSprites[3];
+            SettingsButton.spriteState = tempState;
+
             SettingsAnimator.Play("CloseSettings", -1, 0);
         }
         else
+        {
+            SettingsButton.GetComponent<Image>().sprite = settingSprites[0];
+
+            SpriteState tempState = SettingsButton.spriteState;
+            tempState.pressedSprite = settingSprites[1];
+            SettingsButton.spriteState = tempState;
+
             SettingsAnimator.Play("OpenSettings", -1, 0);
+        }
     }
 
     public void ToggleMute()
@@ -221,11 +249,27 @@ public class GameManager : MonoBehaviour
     {
         if (!PowerSaveToggle.isOn)
         {
+            PowerSaveToggle.GetComponent<Image>().sprite = powerSaveSprites[2];
 
+            SpriteState tempState = PowerSaveToggle.spriteState;
+            tempState.pressedSprite = powerSaveSprites[3];
+            PowerSaveToggle.spriteState = tempState;
+
+            QualitySettings.shadows = ShadowQuality.All;
+
+            PlayerPrefs.SetInt("shadow", 1); //0 is no shadow, 1 is have shadow
         }
         else
         {
+            PowerSaveToggle.GetComponent<Image>().sprite = powerSaveSprites[0];
 
+            SpriteState tempState = PowerSaveToggle.spriteState;
+            tempState.pressedSprite = powerSaveSprites[1];
+            PowerSaveToggle.spriteState = tempState;
+
+            QualitySettings.shadows = ShadowQuality.Disable;
+
+            PlayerPrefs.SetInt("shadow", 0); //0 is no shadow, 1 is have shadow
         }
     }
 }
