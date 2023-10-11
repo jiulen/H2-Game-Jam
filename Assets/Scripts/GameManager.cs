@@ -94,6 +94,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerScript.instance.lastScoreIncreaseTime = Time.time;
+        SwipeMovement.instance.Move("MoveUp");
         SetGameState(StateType.gameplay);
     }
 

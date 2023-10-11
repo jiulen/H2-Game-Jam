@@ -66,7 +66,12 @@ public class SwipeMovement : MonoBehaviour
         if (animationTime > 1 && PlayerScript.instance.isAlive)
         {
             dir = " ";
-            highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z));
+
+            if (Mathf.RoundToInt(transform.position.z) > highestPos) // check if score increase then update latest time
+                PlayerScript.instance.lastScoreIncreaseTime = Time.time;
+
+            highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z)); // set the highest pos after comparison
+
             PlayerScript.instance.score = highestPos;
             Score.text = PlayerScript.instance.score.ToString();
             //if(isHopping)
@@ -112,7 +117,10 @@ public class SwipeMovement : MonoBehaviour
         {
             startTouchPos = touch.position;
         }
-        
+
+        if (GameManager.instance.state != StateType.gameplay)
+            return;
+
         if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
         {
             endTouchPos = touch.position;
@@ -146,7 +154,7 @@ public class SwipeMovement : MonoBehaviour
         }
     }
 
-    void Move(string moveDirStr)
+    public void Move(string moveDirStr)
     {
         if (!IsGrounded())
             return;
@@ -192,7 +200,7 @@ public class SwipeMovement : MonoBehaviour
             animator.Play(moveDirStr, -1, 0);
             dir = moveDirStr;
 
-            Debug.Log("A: " + moveDirStr);
+            //Debug.Log("A: " + moveDirStr);
         }
         
     }

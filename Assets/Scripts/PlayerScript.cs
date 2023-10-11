@@ -10,6 +10,9 @@ public class PlayerScript : MonoBehaviour
     public int score;
     public bool isAlive;
 
+
+    public float lastScoreIncreaseTime;
+    private float deathTime;
     void Start()
     {
         if (!instance)
@@ -25,12 +28,17 @@ public class PlayerScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         score = 0;
         isAlive = true;
+        lastScoreIncreaseTime = 0f;
+        deathTime = 10f;
     }
     // Update is called once per frame
     void Update()
     {
         if (GameManager.instance.state != StateType.gameplay)
             return;
+
+        if (Time.time > lastScoreIncreaseTime + deathTime)
+            GameManager.instance.SetGameState(StateType.death);
 
         if (SwipeMovement.instance.isHopping)
         {

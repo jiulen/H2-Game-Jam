@@ -7,6 +7,7 @@ public class CameraScript : MonoBehaviour
     public static CameraScript instance;
 
     public float minZ = 0.0f;
+    float camMinZ;
     public float speedIncrementZ = 1.0f;
     public float speedOffsetZ = 4.0f;
     public bool moving = false;
@@ -41,45 +42,37 @@ public class CameraScript : MonoBehaviour
 
         initialOffset = transform.position;
         offset = initialOffset;
+
+        camMinZ = transform.position.z;
     }
 
     void Update()
     {
        if(moving)
        {
-            if(camera.WorldToScreenPoint(player.transform.position).y > Screen.height * 0.3f)
+            Vector3 playerPosition = player.transform.position;
+            if (camera.WorldToScreenPoint(player.transform.position).y > Screen.height * 0.3f)
             {
-                Vector3 playerPosition = player.transform.position;
+                // catchup to player
                 transform.position = Vector3.Lerp(transform.position ,new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + initialOffset, Time.deltaTime);
                 offset = initialOffset;
             }
             else
-            {
-                Vector3 playerPosition = player.transform.position;
+            { 
+                // approach player
                 transform.position = Vector3.Lerp(transform.position, new Vector3(playerPosition.x, 0, Mathf.Max(minZ, playerPosition.z)) + offset, Time.deltaTime);
-
-                // Increase z over time if moving.
                 offset.z += speedIncrementZ * Time.deltaTime * 0.2f;
-
-                //// Increase/decrease z when player is moving south/north.
-                if (SwipeMovement.instance.animationTime < 1)
-                {
-                    if (SwipeMovement.instance.dir == "MoveUp")
-                    {
-                        offset.z -= speedOffsetZ * Time.deltaTime * 0.5f;
-                    }
-                }
             }
-            minZ = Mathf.Max(minZ, transform.position.z);
+            // prevent camera from moving backwards
+            minZ = Mathf.Max(minZ, playerPosition.z);
         }
     }
 
 
     public void Reset()
     {
-        // TODO This kind of reset is dirty, refactor might be needed.
         moving = false;
         offset = initialOffset;
-        transform.position = new Vector3(2.5f, 10.0f, -7.5f);
+        transform.position = initialOffset;
     }
 }
