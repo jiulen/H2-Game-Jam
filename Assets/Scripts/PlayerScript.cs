@@ -39,7 +39,10 @@ public class PlayerScript : MonoBehaviour
         else
         {
             player.GetComponent<Rigidbody>().isKinematic = false;
-            player.transform.position = new Vector3(Mathf.RoundToInt(player.transform.position.x), player.transform.position.y, Mathf.RoundToInt(player.transform.position.z));
+            if (isAlive)
+            {
+                player.transform.position = new Vector3(Mathf.RoundToInt(player.transform.position.x), player.transform.position.y, Mathf.RoundToInt(player.transform.position.z));
+            }            
         }
     }
 }
