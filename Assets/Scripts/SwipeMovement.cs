@@ -178,6 +178,9 @@ public class SwipeMovement : MonoBehaviour
         }
         else
         {
+            //Play sound
+            AudioManager.Instance.PlaySFX("playerMove", transform.position);
+
             animator.Play(moveDirStr, -1, 0);
             dir = moveDirStr;
         }
