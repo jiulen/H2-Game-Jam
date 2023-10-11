@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour
             {
                 //SwipeMovement.instance.animator.enabled = false;
                 //player.GetComponent<Rigidbody>().useGravity = true;
-                player.GetComponent<Rigidbody>().isKinematic = false;
+                //player.GetComponent<Rigidbody>().isKinematic = false; // remove for paper
                 GameManager.instance.SetGameState(StateType.death);
             }
         }
