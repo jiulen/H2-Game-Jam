@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class Obstacle : MonoBehaviour
 {
     public enum ObstacleType
@@ -31,40 +30,10 @@ public class Obstacle : MonoBehaviour
     public Animator animator;
     public GameObject splashPrefab;
 
-    public int heightz = 0;
-    public int widthx = 0;
-
     // Start is called before the first frame update
     void Start()
     {
-        //switch (typeObstacle)
-        //{
-        //    case TypeObstacle.SafePlatform1:
-        //        heightz = 2;
-        //        widthx = 3;
-        //        break;
-
-        //    case TypeObstacle.SafePlatform2:
-        //        heightz = 2;
-        //        widthx = 5;
-        //        break;
-
-        //    case TypeObstacle.SafePlatform3:
-        //        heightz = 3;
-        //        widthx = 3;
-        //        break;
-
-        //    case TypeObstacle.SwingingBall:
-        //        heightz = 1;
-        //        widthx = 3;
-        //        break;
-
-        //    default:
-        //        heightz = 0;
-        //        widthx = 0;
-        //        break;
-            
-        //}
+        
     }
 
     // Update is called once per frame

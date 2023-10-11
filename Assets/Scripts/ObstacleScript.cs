@@ -6,7 +6,7 @@ using UnityEngine;
 public class ObstacleScript
 {
     public string name;
-    public Obstacle obstacle;
+    public GameObject obstacle;
     public int heightz;
     public int widthx;
 }

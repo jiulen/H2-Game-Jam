@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LevelManager : MonoBehaviour
 
     private Transform player;
 
-    private Vector3 offset;
+    public Vector3 offset;
 
     public ObstacleScript[] obstaclePrefabs;
     // Start is called before the first frame update
@@ -23,7 +24,7 @@ public class LevelManager : MonoBehaviour
         else
             Destroy(this);
 
-        offset = new Vector3(0, -0.25f, 0);
+        offset = new Vector3(0, -0.25f, 3); 
     }
 
     private void Awake()
@@ -35,5 +36,24 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void CreateObstacle(string name, Vector3 position)
+    {
+        ObstacleScript s = Array.Find(obstaclePrefabs, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("object not found");
+        }
+        else
+        {
+            //offset.x += s.widthx;
+            int initpos = (int)(s.heightz * 0.5f);
+            offset.z += initpos;
+            Debug.Log(offset.z + " " + s.heightz);
+            GameObject go = Instantiate(s.obstacle, offset, Quaternion.identity);
+            offset.z += (s.heightz - initpos);
+        }
     }
 }
