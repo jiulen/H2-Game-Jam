@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public StateType state;
     public bool resetPLayer;
     public int highscore;
+    public TMP_Text highscoreText;
     public int coins;
     public TMP_Text coinsText;
 
@@ -43,23 +44,25 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("highscore"))
         {
-            highscore = PlayerPrefs.GetInt("highscore", highscore);
+            highscore = PlayerPrefs.GetInt("highscore", 0);
         }
         else
         {
             highscore = 0;
             PlayerPrefs.SetInt("highscore", highscore);
         }
+        highscoreText.text = "HI " + highscore.ToString();
 
         if (PlayerPrefs.HasKey("coins"))
         {
-            coins = PlayerPrefs.GetInt("coins", coins);
+            coins = PlayerPrefs.GetInt("coins", 0);
         }
         else
         {
             coins = 0;
             PlayerPrefs.SetInt("coins", coins);
         }
+        coinsText.text = coins.ToString();
 
         SetGameState(StateType.menu);
     }
@@ -125,6 +128,14 @@ public class GameManager : MonoBehaviour
                     GameUI.SetActive(false);
                     DeathUI.SetActive(true);
                     CameraScript.instance.moving = false;
+                    if (PlayerScript.instance.score > highscore)
+                    {
+                        highscore = PlayerScript.instance.score;
+                        PlayerPrefs.SetInt("highscore", highscore);
+                    }
+
+                    PlayerPrefs.SetInt("coins", coins);
+
                     break;
                 }
             default:
