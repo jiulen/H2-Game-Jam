@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
     public Toggle SettingsButton;
     public Animator SettingsAnimator;
 
+    public Toggle MuteToggle;
+    public Sprite[] mutedSprites;
+
+    public Toggle PowerSaveToggle;
+    public Sprite[] powerSaveSprites;
+
     private Touch touch;
 
     // Start is called before the first frame update
@@ -63,6 +69,19 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("coins", coins);
         }
         coinsText.text = coins.ToString();
+
+        if (PlayerPrefs.HasKey("mute"))
+        {
+            if (PlayerPrefs.GetInt("mute", 0) == 0)
+            {
+                MuteToggle.isOn = true;
+                ToggleMute();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("mute", 1); //0 is muted, 1 is not muted
+        }
 
         SetGameState(StateType.menu);
     }
@@ -160,5 +179,47 @@ public class GameManager : MonoBehaviour
         }
         else
             SettingsAnimator.Play("OpenSettings", -1, 0);
+    }
+
+    public void ToggleMute()
+    {
+        if (!MuteToggle.isOn)
+        {
+            MuteToggle.GetComponent<Image>().sprite = mutedSprites[2];
+
+            SpriteState tempState = MuteToggle.spriteState;
+            tempState.pressedSprite = mutedSprites[3];
+            MuteToggle.spriteState = tempState;
+
+            AudioManager.Instance.sfxSource.volume = 100;
+            AudioManager.Instance.bgmSource.volume = 100;
+
+            PlayerPrefs.SetInt("mute", 1); //0 is muted, 1 is not muted
+        }
+        else
+        {
+            MuteToggle.GetComponent<Image>().sprite = mutedSprites[0];
+
+            SpriteState tempState = MuteToggle.spriteState;
+            tempState.pressedSprite = mutedSprites[1];
+            MuteToggle.spriteState = tempState;
+
+            AudioManager.Instance.sfxSource.volume = 0;
+            AudioManager.Instance.bgmSource.volume = 0;
+
+            PlayerPrefs.SetInt("mute", 0); //0 is muted, 1 is not muted
+        }
+    }
+
+    public void TogglePowerSaving()
+    {
+        if (!PowerSaveToggle.isOn)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }

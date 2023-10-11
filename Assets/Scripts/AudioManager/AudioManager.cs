@@ -186,7 +186,7 @@ public class AudioManager : MonoBehaviour
     public void ToggleBGM()
     {
         bgmSource.mute = !bgmSource.mute;
-        bgSource.mute = !bgSource.mute;
+        //bgSource.mute = !bgSource.mute;
     }
 
     public void ToggleSFX()
