@@ -55,10 +55,7 @@ public class Obstacle : MonoBehaviour
         if (collision.collider.tag != "Player" || obstacleType == ObstacleType.wall || obstacleType == ObstacleType.floor)
             return;
 
-
         PlayerScript.instance.PlayerWalkDie(collision.collider.transform, transform);
-
-        GameManager.instance.SetGameState(StateType.death);
     }
 
     public void OnTriggerEnter(Collider other)

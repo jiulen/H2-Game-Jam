@@ -174,7 +174,7 @@ public class GameManager : MonoBehaviour
                     }
 
                     PlayerPrefs.SetInt("coins", coins);
-
+                    //PlayerScript.instance.isAlive = false;
                     break;
                 }
             default:

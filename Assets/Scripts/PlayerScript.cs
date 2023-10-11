@@ -56,19 +56,38 @@ public class PlayerScript : MonoBehaviour
                 player.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
+
+        if (!isAlive)
+        {
+            if (SwipeMovement.instance.animationTime > 1)
+            {
+                //SwipeMovement.instance.animator.enabled = false;
+                //player.GetComponent<Rigidbody>().useGravity = true;
+                player.GetComponent<Rigidbody>().isKinematic = false;
+                GameManager.instance.SetGameState(StateType.death);
+            }
+        }
     }
 
     public void PlayerWalkDie(Transform playerTransform, Transform obstacleTransform) //For when player walk into obstacle that kil
     {
-        if (!isAlive || !SwipeMovement.instance.isHopping)
-            return;
+        if(!SwipeMovement.instance.isHopping)
+        {
+            SwipeMovement.instance.animator.enabled = false; // remove this for paper
+            player.GetComponent<Rigidbody>().useGravity = true;
+            player.GetComponent<Rigidbody>().isKinematic = false;
+            GameManager.instance.SetGameState(StateType.death);
+            return; // remove this for paper
+        }
 
+        if (!isAlive)
+            return;
         isAlive = false;
 
         playerTransform.SetParent(obstacleTransform, true);
 
         player.GetComponent<Rigidbody>().isKinematic = false;
-        player.GetComponent<Rigidbody>().useGravity = false;
+        player.GetComponent<Rigidbody>().useGravity = true;
 
         switch (SwipeMovement.instance.curRotation)
         {
