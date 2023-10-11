@@ -28,6 +28,9 @@ public class SwipeMovement : MonoBehaviour
     public LayerMask obstacleLayerMask;
 
     private Rigidbody rbody;
+
+    public int curRotation;
+
     //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
@@ -52,15 +55,6 @@ public class SwipeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Test
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            PlayerScript.instance.isAlive = false;
-
-            transform.localScale = new Vector3(1, 1, 0.1f);
-            animator.Play("SquishFront", -1, 0);
-        }
-
         if (transform.localScale.y != 1) Debug.Log(transform.localScale.y);
 
         animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -163,18 +157,22 @@ public class SwipeMovement : MonoBehaviour
             case ("MoveUp"):
                 moveDirVec = Vector3.forward;
                 model.transform.rotation = Quaternion.Euler(0, 0, 0);
+                curRotation = 0;
                 break;
             case ("MoveDown"):
                 moveDirVec = -Vector3.forward;
                 model.transform.rotation = Quaternion.Euler(0, 180, 0);
+                curRotation = 180;
                 break;
             case ("MoveLeft"):
                 moveDirVec = -Vector3.right;
                 model.transform.rotation = Quaternion.Euler(0, 270, 0);
+                curRotation = 270;
                 break;
             case ("MoveRight"):
                 moveDirVec = Vector3.right;
                 model.transform.rotation = Quaternion.Euler(0, 90, 0);
+                curRotation = 90;
                 break;
         }
 
@@ -193,6 +191,8 @@ public class SwipeMovement : MonoBehaviour
 
             animator.Play(moveDirStr, -1, 0);
             dir = moveDirStr;
+
+            Debug.Log("A: " + moveDirStr);
         }
         
     }

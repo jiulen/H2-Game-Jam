@@ -29,6 +29,11 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayerWalkDie();
+        }
+
         if (GameManager.instance.state != StateType.gameplay)
             return;
 
@@ -47,6 +52,35 @@ public class PlayerScript : MonoBehaviour
             {
                 player.GetComponent<Rigidbody>().isKinematic = true;
             }
+        }
+    }
+
+    public void PlayerWalkDie() //For when player walk into obstacle that kil
+    {
+        isAlive = false;
+
+        Debug.Log(player.GetComponent<Rigidbody>().isKinematic);
+
+        switch (SwipeMovement.instance.curRotation)
+        {
+            case 0:
+                SwipeMovement.instance.transform.localScale = new Vector3(1, 1, 0.1f);
+                SwipeMovement.instance.animator.Play("SquishFront", -1, 0);
+                break;
+            case 180:
+                SwipeMovement.instance.transform.localScale = new Vector3(1, 1, 0.1f);
+                SwipeMovement.instance.animator.Play("SquishBack", -1, 0);
+                break;
+            case 270:
+                SwipeMovement.instance.transform.localScale = new Vector3(0.1f, 1, 1);
+                SwipeMovement.instance.animator.Play("SquishLeft", -1, 0);
+                break;
+            case 90:
+                SwipeMovement.instance.transform.localScale = new Vector3(0.1f, 1, 1);
+                SwipeMovement.instance.animator.Play("SquishRight", -1, 0);
+                break;
+            default:
+                break;
         }
     }
 }

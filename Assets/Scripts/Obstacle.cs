@@ -36,6 +36,10 @@ public class Obstacle : MonoBehaviour
         if (collision.collider.tag != "Player")
             return;
 
+        //collision.collider.transform.parent.SetParent(transform, true);
+
+        PlayerScript.instance.PlayerWalkDie();
+
         GameManager.instance.SetGameState(StateType.death);
     }
 
