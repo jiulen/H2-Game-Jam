@@ -85,6 +85,19 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("mute", 1); //0 is muted, 1 is not muted
         }
 
+        if (PlayerPrefs.HasKey("shadow"))
+        {
+            if (PlayerPrefs.GetInt("shadow", 0) == 0)
+            {
+                PowerSaveToggle.isOn = true;
+                TogglePowerSaving();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("shadow", 1); //0 is no shadow, 1 is have shadow
+        }
+
         SetGameState(StateType.menu);
     }
     private void Awake()
@@ -219,11 +232,27 @@ public class GameManager : MonoBehaviour
     {
         if (!PowerSaveToggle.isOn)
         {
+            PowerSaveToggle.GetComponent<Image>().sprite = powerSaveSprites[2];
 
+            SpriteState tempState = PowerSaveToggle.spriteState;
+            tempState.pressedSprite = powerSaveSprites[3];
+            PowerSaveToggle.spriteState = tempState;
+
+            QualitySettings.shadows = ShadowQuality.All;
+
+            PlayerPrefs.SetInt("shadow", 1); //0 is no shadow, 1 is have shadow
         }
         else
         {
+            PowerSaveToggle.GetComponent<Image>().sprite = powerSaveSprites[0];
 
+            SpriteState tempState = PowerSaveToggle.spriteState;
+            tempState.pressedSprite = powerSaveSprites[1];
+            PowerSaveToggle.spriteState = tempState;
+
+            QualitySettings.shadows = ShadowQuality.Disable;
+
+            PlayerPrefs.SetInt("shadow", 0); //0 is no shadow, 1 is have shadow
         }
     }
 }
