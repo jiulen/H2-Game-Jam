@@ -14,18 +14,9 @@ public class Obstacle : MonoBehaviour
 
     [SerializeField] ObstacleType obstacleType;
 
-    public enum TypeObstacle
-    {
-        Nothing,
-        SafePlatform1,
-        SafePlatform2,
-        SafePlatform3,
-        SwingingBall,
-        Platformgaps,
-        BalanceBeam
-    }
 
-    [SerializeField] TypeObstacle typeObstacle;
+
+    //[SerializeField] TypeObstacle typeObstacle;
 
     public Animator animator;
     public GameObject splashPrefab;
@@ -39,16 +30,13 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (transform.position.z < LevelManager.instance.player.position.z - 8)
+            Destroy(gameObject);
     }
 
     public ObstacleType GetObstacleType()
     {
         return obstacleType;
-    }
-    public TypeObstacle GetTypeObstacle()
-    {
-        return typeObstacle;
     }
     public void OnCollisionEnter(Collision collision)
     {

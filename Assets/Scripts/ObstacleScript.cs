@@ -7,6 +7,7 @@ public class ObstacleScript
 {
     public string name;
     public GameObject obstacle;
+    public bool isSafe;
     public int heightz;
     public int widthx;
 }

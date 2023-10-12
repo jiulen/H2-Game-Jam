@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4341847496830272579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4341847496830272589}
+  - component: {fileID: 4341847496830272588}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4341847496830272589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4341847496830272579}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4341847496830272588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4341847496830272579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669ae0a2f88e77344b857cae0c6ec4e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterPrefab: {fileID: 0}
+  player: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  obstaclePrefabs:
+  - name: platform5x5
+    obstacle: {fileID: 1639964547221374422, guid: 5b60e37eb3cda0046bb0966e91189111, type: 3}
+    isSafe: 1
+    heightz: 5
+    widthx: 5
+  - name: wall
+    obstacle: {fileID: 2358354880073388705, guid: 52a6b50e9f1d9954d800f3ef0bdabb6c, type: 3}
+    isSafe: 0
+    heightz: 1
+    widthx: 1
+  - name: WreckingBall
+    obstacle: {fileID: 4177129456350927956, guid: e0c5ea43ae2156243847dedc40d2ae84, type: 3}
+    isSafe: 0
+    heightz: 1
+    widthx: 1
+  - name: platform1x1
+    obstacle: {fileID: 1545669914676840202, guid: 5d27146f2f37ca44eaec20d87f978f19, type: 3}
+    isSafe: 1
+    heightz: 1
+    widthx: 1
+  - name: platform1x3
+    obstacle: {fileID: 1545669914676840202, guid: 416b413e322825b42ae19e1b71a3fd1d, type: 3}
+    isSafe: 1
+    heightz: 1
+    widthx: 3
+  - name: platform3x3
+    obstacle: {fileID: 7010734112936096693, guid: 8c2308255273b36419b3d9448dac014e, type: 3}
+    isSafe: 1
+    heightz: 3
+    widthx: 3

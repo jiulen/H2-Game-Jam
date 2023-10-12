@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
         }
 
         SetGameState(StateType.menu);
-        LevelManager.instance.GenerateLevel();
     }
     private void Awake()
     {
@@ -115,8 +114,6 @@ public class GameManager : MonoBehaviour
         PlayerScript.instance.lastScoreIncreaseTime = Time.time;
         SwipeMovement.instance.Move("MoveUp");
         SetGameState(StateType.gameplay);
-        //LevelManager.instance.CreateObstacle("5x5 platform", LevelManager.instance.offset);
-        //LevelManager.instance.CreateObstacle("WreckingBall", LevelManager.instance.offset);
     }
 
     // Update is called once per frame

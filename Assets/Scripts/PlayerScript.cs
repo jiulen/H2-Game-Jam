@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public int score;
     public bool isAlive;
 
+    private GameObject water;
 
     public float lastScoreIncreaseTime;
     private float deathTime;
@@ -26,7 +27,8 @@ public class PlayerScript : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        score = 0;
+        water = GameObject.FindGameObjectWithTag("Water");
+        score = 1;
         isAlive = true;
         lastScoreIncreaseTime = 0f;
         deathTime = 10f;
@@ -50,6 +52,7 @@ public class PlayerScript : MonoBehaviour
             if (isAlive)
             {
                 player.transform.position = new Vector3(Mathf.RoundToInt(player.transform.position.x), player.transform.position.y, Mathf.RoundToInt(player.transform.position.z));
+                water.transform.position = new Vector3(player.transform.position.x, water.transform.position.y, player.transform.position.z);
             }
             else
             {
