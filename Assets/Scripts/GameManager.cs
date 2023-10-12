@@ -149,6 +149,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Delete)) //resets playerprefs (for debug)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+        //Test add gacha char
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            int charr = GetRandomAvailableCharacter();
+            Debug.Log("char : " + charr);
+            if (charr != -1) AddCharacter(charr);
+        }
+
         //if (Input.touchCount > 0)
         //{
         //    touch = Input.GetTouch(0);
@@ -325,7 +337,21 @@ public class GameManager : MonoBehaviour
 
     public int GetRandomAvailableCharacter()
     {
-        return 0;
+        if (charsUnlocked.Count >= totalChar)
+        {
+            return -1;
+        }
+
+        List<int> lockedChars = new List<int>();
+        for (int i = 0; i < totalChar; ++i)
+        {
+            if (!charsUnlocked.Contains(i))
+            {
+                lockedChars.Add(i);
+            }
+        }
+
+        return lockedChars[Random.Range(0, lockedChars.Count)];
     }
 
     public void AddCharacter(int charIndex)
