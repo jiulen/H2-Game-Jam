@@ -185,6 +185,10 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
+    public void GoMainMenuState()
+    {
+        SetGameState(StateType.menu);
+    }
 
     public void Refreseh()
     {
