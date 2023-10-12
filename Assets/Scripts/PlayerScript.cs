@@ -53,7 +53,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                player.GetComponent<Rigidbody>().isKinematic = true;
+                player.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
 
@@ -63,7 +63,7 @@ public class PlayerScript : MonoBehaviour
             {
                 //SwipeMovement.instance.animator.enabled = false;
                 //player.GetComponent<Rigidbody>().useGravity = true;
-                //player.GetComponent<Rigidbody>().isKinematic = false; // remove for paper
+                player.GetComponent<Rigidbody>().isKinematic = false; // remove for paper
                 GameManager.instance.SetGameState(StateType.death);
             }
         }
@@ -73,18 +73,23 @@ public class PlayerScript : MonoBehaviour
     {
         if(!SwipeMovement.instance.isHopping)
         {
-            SwipeMovement.instance.animator.enabled = false; // remove this for paper
+            //SwipeMovement.instance.animator.enabled = false; // remove this for paper
             player.GetComponent<Rigidbody>().useGravity = true;
             player.GetComponent<Rigidbody>().isKinematic = false;
             GameManager.instance.SetGameState(StateType.death);
-            return; // remove this for paper
+            //return; // remove this for paper
         }
 
         if (!isAlive)
             return;
         isAlive = false;
 
-        playerTransform.SetParent(obstacleTransform, true);
+        //playerTransform.SetParent(obstacleTransform, true);
+        //HingeJoint hj = playerTransform.gameObject.AddComponent<HingeJoint>();
+        //hj.connectedBody = obstacleTransform.GetComponent<Rigidbody>();
+        //hj.axis = new Vector3(0, 0, 1);
+        //SwipeMovement.instance.isHopping = false;
+        //playerTransform.gameObject.GetComponent<HingeJoint>().connectedBody = obstacleTransform.GetComponent<Rigidbody>();
 
         player.GetComponent<Rigidbody>().isKinematic = false;
         player.GetComponent<Rigidbody>().useGravity = true;

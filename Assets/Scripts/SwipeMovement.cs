@@ -68,7 +68,14 @@ public class SwipeMovement : MonoBehaviour
             dir = " ";
 
             if (Mathf.RoundToInt(transform.position.z) > highestPos) // check if score increase then update latest time
+            {
                 PlayerScript.instance.lastScoreIncreaseTime = Time.time;
+                if(highestPos % 20 == 13) // generate 7 tiles away from max
+                {
+                    LevelManager.instance.GenerateLevel();
+                }
+            }
+   
 
             highestPos = Mathf.Max(highestPos, Mathf.RoundToInt(transform.position.z)); // set the highest pos after comparison
 
