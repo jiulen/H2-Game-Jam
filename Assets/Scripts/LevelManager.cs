@@ -30,10 +30,14 @@ public class LevelManager : MonoBehaviour
 
     public enum SafePlatform
     {
+        platform5x5,
         platform1x3,
         platform3x3,
-        platform5x5,
-        platform1x1
+        platform1x1,
+        platform1x2,
+        platform2x3,
+        platformPillar,
+        SafePlatformSize
     }
     void Start()
     {
@@ -60,6 +64,7 @@ public class LevelManager : MonoBehaviour
 
     public void GenerateLevel()
     {
+        float diffScale = 1 * Mathf.Log10(difficulty);
         // generate the next 30 tiles
         Vector3 initialOffset = offset;
         int amtToGenerate = 30 - (int)(offset.z % 30);
@@ -77,10 +82,17 @@ public class LevelManager : MonoBehaviour
                 int maxx = (int)(prevObject.widthx * 0.5f);
                 int minx = -maxx;
 
+                if (prevObject.widthx % 2 == 0)
+                {
+                    maxx--;
+                }
+ 
+
                 offset.x += UnityEngine.Random.Range(minx, maxx + 1);
                 //obstacle = TypeObstacle.platform1x1;
                 //CreateObstacle(obstacle.ToString(), offset);
-                int numToGenerate = (int)UnityEngine.Random.Range(1f + Mathf.Log10(difficulty), 3f + Mathf.Log10(difficulty));
+                
+                int numToGenerate = (int)UnityEngine.Random.Range(1f + diffScale, 3f + diffScale);
                 Debug.Log(numToGenerate);
                 for (int i = 0; i < numToGenerate; ++i)
                 {
@@ -90,9 +102,19 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                SafePlatform safe;
-                safe = (SafePlatform)UnityEngine.Random.Range(0, 4);
-                CreateObstacle(safe.ToString(), offset);
+                int random = UnityEngine.Random.Range(0, 100);
+                if (random < (5 - diffScale))
+                    CreateObstacle("platform5x5", offset);
+                else if (random >= 5 && random < (15 - diffScale))
+                {
+                    CreateObstacle("platform3x3", offset);
+                }
+                else
+                {
+                    SafePlatform safe;
+                    safe = (SafePlatform)UnityEngine.Random.Range(0, (int)SafePlatform.SafePlatformSize);
+                    CreateObstacle(safe.ToString(), offset);
+                }
             }
         }
     }
@@ -110,6 +132,9 @@ public class LevelManager : MonoBehaviour
             //offset.x += s.widthx;
             int maxx = (int)(s.widthx * 0.5f);
             int minx = -maxx;
+
+            if (s.widthx % 2 == 0)
+                minx++;
 
             offset.x += UnityEngine.Random.Range(minx, maxx + 1);
 

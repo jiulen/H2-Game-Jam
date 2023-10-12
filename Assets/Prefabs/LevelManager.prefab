@@ -78,3 +78,18 @@ MonoBehaviour:
     isSafe: 1
     heightz: 3
     widthx: 3
+  - name: platform2x3
+    obstacle: {fileID: 1545669914676840202, guid: 35d65781ecd8a7e44adb5b31cf15cb0d, type: 3}
+    isSafe: 1
+    heightz: 2
+    widthx: 3
+  - name: platformPillar
+    obstacle: {fileID: 3255954079284180606, guid: 060eb3cc34d6dc146a20679daad5c1cf, type: 3}
+    isSafe: 1
+    heightz: 1
+    widthx: 1
+  - name: platform1x2
+    obstacle: {fileID: 1545669914676840202, guid: 5e0e1d27c1c8e3d4bb80532f198e16f3, type: 3}
+    isSafe: 1
+    heightz: 1
+    widthx: 2

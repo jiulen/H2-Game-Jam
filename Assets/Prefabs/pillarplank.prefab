@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1545669914676840202
+--- !u!1 &3255954079284180606
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6716182805401860521}
-  - component: {fileID: 3135472417910268851}
-  - component: {fileID: 6167856490150185075}
-  - component: {fileID: 8943885059045731433}
-  - component: {fileID: 5601228791469300245}
+  - component: {fileID: 505851479419505282}
+  - component: {fileID: 671742428322649592}
+  - component: {fileID: 4784188521497252745}
+  - component: {fileID: 1700467565474792903}
+  - component: {fileID: 4426036071533883929}
   m_Layer: 0
-  m_Name: plank1m
+  m_Name: pillarplank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6716182805401860521
+--- !u!4 &505851479419505282
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545669914676840202}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 50, z: 100}
+  m_GameObject: {fileID: 3255954079284180606}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.1296554, y: 0, z: -5.9514866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3135472417910268851
+--- !u!33 &671742428322649592
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545669914676840202}
-  m_Mesh: {fileID: 9034537129903471785, guid: 188c63890832c5f4cbdd2959e2ab3f6c, type: 3}
---- !u!23 &6167856490150185075
+  m_GameObject: {fileID: 3255954079284180606}
+  m_Mesh: {fileID: -2371765541851908452, guid: 65864bd79b125b04ab77ae1e2c59903b, type: 3}
+--- !u!23 &4784188521497252745
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545669914676840202}
+  m_GameObject: {fileID: 3255954079284180606}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b9ae0a35ebd4ce4f854cccdd3f49547, type: 2}
+  - {fileID: 2100000, guid: b9c0918ebc0f3a84f8fcd2054210b82b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,26 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8943885059045731433
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545669914676840202}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.01, z: 0.01}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5601228791469300245
+--- !u!114 &1700467565474792903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545669914676840202}
+  m_GameObject: {fileID: 3255954079284180606}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39e39d59d6b1af44c8cae60c090687ac, type: 3}
@@ -113,3 +100,16 @@ MonoBehaviour:
   obstacleType: 3
   animator: {fileID: 0}
   splashPrefab: {fileID: 0}
+--- !u!65 &4426036071533883929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255954079284180606}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
