@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class LevelManager : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class LevelManager : MonoBehaviour
 
     private ObstacleScript prevObject;
 
+    public int colToIgnore;
+
+    public List<int> availCol;
+
     public enum TypeObstacle
     {
         platform1x1,
@@ -31,8 +36,8 @@ public class LevelManager : MonoBehaviour
     public enum SafePlatform
     {
         platform5x5,
-        platform1x3,
         platform3x3,
+        platform1x3,
         platform1x1,
         platform1x2,
         platform2x3,
@@ -53,13 +58,19 @@ public class LevelManager : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         difficulty = 1;
         prevObject = Array.Find(obstaclePrefabs, x => x.name == "platform5x5");
+        colToIgnore = (UnityEngine.Random.value < 0.5f ? -2 : -1);
+        Debug.Log(colToIgnore);
         GenerateLevel();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         difficulty = PlayerScript.instance.score;
+
+        if (GameManager.instance.state == StateType.death && !SwipeMovement.instance.rbody.isKinematic && player.transform.position.y < -4)
+            SwipeMovement.instance.rbody.isKinematic = true;
     }
 
     public void GenerateLevel()
@@ -73,27 +84,32 @@ public class LevelManager : MonoBehaviour
         Debug.Log(prevObject.isSafe);
         while (offset.z < initialOffset.z + amtToGenerate)
         {
-            //CreateObstacle("5x5 platform", offset);
-
-
-
             if (prevObject.isSafe)
             {
-                int maxx = (int)(prevObject.widthx * 0.5f);
-                int minx = -maxx;
 
-                if (prevObject.widthx % 2 == 0)
+                if(prevObject.widthx != 1)
                 {
-                    maxx--;
-                }
- 
+                    int maxx = (int)(prevObject.widthx * 0.5f);
+                    int minx = -maxx;
+         
+                    if (colToIgnore > offset.x + minx)
+                    {
+                        if (prevObject.name == "platform1x3")
+                            offset.x += minx;
 
-                offset.x += UnityEngine.Random.Range(minx, maxx + 1);
-                //obstacle = TypeObstacle.platform1x1;
-                //CreateObstacle(obstacle.ToString(), offset);
-                
+                        else
+                            offset.x = UnityEngine.Random.Range((int)(offset.x + minx), colToIgnore);
+                    }
+                    else if(colToIgnore < offset.x + maxx)
+                    {
+                        if (prevObject.name == "platform1x3")
+                            offset.x += maxx;
+                        else
+                            offset.x = UnityEngine.Random.Range(colToIgnore + 1,(int)(offset.x + maxx));
+                    }    
+                }
+
                 int numToGenerate = (int)UnityEngine.Random.Range(1f + diffScale, 3f + diffScale);
-                Debug.Log(numToGenerate);
                 for (int i = 0; i < numToGenerate; ++i)
                 {
                     obstacle = TypeObstacle.WreckingBall;
@@ -102,18 +118,19 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
+
                 int random = UnityEngine.Random.Range(0, 100);
                 if (random < (5 - diffScale))
-                    CreateObstacle("platform5x5", offset);
+                    CreateObstacleAfter("platform5x5", offset);
                 else if (random >= 5 && random < (15 - diffScale))
                 {
-                    CreateObstacle("platform3x3", offset);
+                    CreateObstacleAfter("platform3x3", offset);
                 }
                 else
                 {
                     SafePlatform safe;
-                    safe = (SafePlatform)UnityEngine.Random.Range(0, (int)SafePlatform.SafePlatformSize);
-                    CreateObstacle(safe.ToString(), offset);
+                    safe = (SafePlatform)UnityEngine.Random.Range(2, (int)SafePlatform.SafePlatformSize);
+                    CreateObstacleAfter(safe.ToString(), offset);
                 }
             }
         }
@@ -129,14 +146,47 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            //offset.x += s.widthx;
+            int initpos = (int)(s.heightz * 0.5f);
+            offset.z += initpos;
+            GameObject go = Instantiate(s.obstacle, offset, Quaternion.identity);
+            offset.z += (s.heightz - initpos);
+
+
+            prevObject = s;
+
+
+        }
+    }
+
+    public void CreateObstacleAfter(string name, Vector3 position)
+    {
+        ObstacleScript s = Array.Find(obstaclePrefabs, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("object not found");
+        }
+        else
+        {
+
+            colToIgnore = (int)offset.x;
             int maxx = (int)(s.widthx * 0.5f);
             int minx = -maxx;
 
-            if (s.widthx % 2 == 0)
-                minx++;
-
-            offset.x += UnityEngine.Random.Range(minx, maxx + 1);
+            if(name == "platform1x3")
+            {
+                offset.x += (UnityEngine.Random.value < 0.5f ? minx : maxx);
+            }
+            else
+            {
+                if (s.widthx % 2 == 0)
+                {
+                    offset.x += UnityEngine.Random.Range(minx + 1, maxx + 1);
+                }
+                else
+                    offset.x += UnityEngine.Random.Range(minx, maxx + 1);
+            }
+          
 
             int initpos = (int)(s.heightz * 0.5f);
             offset.z += initpos;

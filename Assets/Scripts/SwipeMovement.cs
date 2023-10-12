@@ -27,7 +27,7 @@ public class SwipeMovement : MonoBehaviour
 
     public LayerMask obstacleLayerMask;
 
-    private Rigidbody rbody;
+    public Rigidbody rbody;
 
     public int curRotation;
 
