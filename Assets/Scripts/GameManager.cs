@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     public int coins;
     public TMP_Text coinsText;
 
+    public List<int> charsUnlocked = new List<int>();
+    public int currChar;
+    public int totalChar;
+
     public GameObject MenuUI;
     public GameObject GameUI;
     public GameObject DeathUI;
@@ -56,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("highscore"))
         {
-            highscore = PlayerPrefs.GetInt("highscore", 0);
+            highscore = PlayerPrefs.GetInt("highscore");
         }
         else
         {
@@ -67,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("coins"))
         {
-            coins = PlayerPrefs.GetInt("coins", 0);
+            coins = PlayerPrefs.GetInt("coins");
         }
         else
         {
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("mute"))
         {
-            if (PlayerPrefs.GetInt("mute", 0) == 0)
+            if (PlayerPrefs.GetInt("mute") == 0)
             {
                 MuteToggle.isOn = true;
                 ToggleMute();
@@ -91,7 +95,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("shadow"))
         {
-            if (PlayerPrefs.GetInt("shadow", 0) == 0)
+            if (PlayerPrefs.GetInt("shadow") == 0)
             {
                 PowerSaveToggle.isOn = true;
                 TogglePowerSaving();
@@ -100,6 +104,32 @@ public class GameManager : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt("shadow", 1); //0 is no shadow, 1 is have shadow
+        }
+
+        if (PlayerPrefs.HasKey("charUnlocks"))
+        {
+            string[] charsStr = PlayerPrefs.GetString("charUnlocks").Split(',');
+            foreach (string charStr in charsStr)
+            {
+                if (int.TryParse(charStr, out int charIndex))
+                    charsUnlocked.Add(charIndex);
+                else
+                    Debug.Log("Wrong char index");
+            }
+        }
+        else
+        {
+            charsUnlocked.Add(0);
+            PlayerPrefs.SetString("charUnlocks", "0"); //index of each char unlocked will be included in string
+        }
+        if (PlayerPrefs.HasKey("currChar"))
+        {
+            currChar = PlayerPrefs.GetInt("currChar");
+        }
+        else
+        {
+            currChar = 0;
+            PlayerPrefs.SetInt("currChar", currChar);
         }
 
         SetGameState(StateType.menu);
@@ -291,5 +321,17 @@ public class GameManager : MonoBehaviour
     public void OpenInventory(bool open)
     {
         InvenUI.SetActive(open);
+    }
+
+    public int GetRandomAvailableCharacter()
+    {
+        return 0;
+    }
+
+    public void AddCharacter(int charIndex)
+    {
+        charsUnlocked.Add(charIndex);
+        string charUnlockedStr = PlayerPrefs.GetString("charUnlocks") + "," + charIndex.ToString();
+        PlayerPrefs.SetString("charUnlocks", charUnlockedStr); //index of each char unlocked will be included in string
     }
 }
