@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject DeathUI;
     public GameObject GachaInvenSelectionUI;
     public GameObject GachaUI;
+    public GameObject GachaResultUI;
     public GameObject InvenUI;
 
     public Toggle SettingsButton;
@@ -328,6 +329,11 @@ public class GameManager : MonoBehaviour
     public void OpenGacha(bool open)
     {
         GachaUI.SetActive(open);
+    }
+
+    public void OpenGachaResult(bool open)
+    {
+        GachaResultUI.SetActive(open);
     }
 
     public void OpenInventory(bool open)
