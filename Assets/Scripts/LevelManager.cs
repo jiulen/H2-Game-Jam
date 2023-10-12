@@ -61,7 +61,6 @@ public class LevelManager : MonoBehaviour
         difficulty = 1;
         prevObject = Array.Find(obstaclePrefabs, x => x.name == "platform5x5");
         colToIgnore = (UnityEngine.Random.value < 0.5f ? -2 : -1);
-        Debug.Log(colToIgnore);
         GenerateLevel();
         
     }
@@ -179,9 +178,7 @@ public class LevelManager : MonoBehaviour
                 offset.z += initpos;
                 GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 0, 0));
                 prevObject = s;
-                offset.x += xOffset;
-                GameObject go1 = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 180, 0));
-                offset.x -= xOffset;
+                GameObject go1 = Instantiate(s.obstacle, offset + new Vector3(xOffset,0,0), Quaternion.Euler(0, 180, 0));
                 offset.z += (s.heightz - initpos);
                 if(opp)
                 {

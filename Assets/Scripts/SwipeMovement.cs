@@ -57,6 +57,7 @@ public class SwipeMovement : MonoBehaviour
         dir = " ";
         isHopping = false;
         rbody = gameObject.GetComponent<Rigidbody>();
+        rbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
     // Update is called once per frame
     void Update()

@@ -23,8 +23,6 @@ public class PlayerScript : MonoBehaviour
         }
         else
             Destroy(this);
-
-        SwipeMovement.instance.rbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     void Awake()
@@ -59,7 +57,6 @@ public class PlayerScript : MonoBehaviour
             if (isAlive)
             {
                 player.transform.position = new Vector3(Mathf.RoundToInt(player.transform.position.x), player.transform.position.y, Mathf.RoundToInt(player.transform.position.z));
-                //SwipeMovement.instance.rbody.constraints = RigidbodyConstraints.FreezeRotation;
                 water.transform.position = new Vector3(player.transform.position.x, water.transform.position.y, player.transform.position.z);
             }
             else
