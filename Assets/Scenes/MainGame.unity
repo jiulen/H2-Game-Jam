@@ -1154,7 +1154,7 @@ MonoBehaviour:
   DeathUI: {fileID: 750309595}
   GachaInvenSelectionUI: {fileID: 138743403}
   GachaUI: {fileID: 276169071}
-  InvenUI: {fileID: 0}
+  InvenUI: {fileID: 1957119870}
   SettingsButton: {fileID: 1224911871}
   SettingsAnimator: {fileID: 1476372554}
   settingSprites:
@@ -1314,6 +1314,11 @@ Transform:
 --- !u!95 &1476372554 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6776273693033626247, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}
+  m_PrefabInstance: {fileID: 2055024036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1957119870 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4893513980223331263, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}
   m_PrefabInstance: {fileID: 2055024036}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1992937438 stripped
