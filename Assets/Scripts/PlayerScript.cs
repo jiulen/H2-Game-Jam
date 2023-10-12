@@ -11,7 +11,6 @@ public class PlayerScript : MonoBehaviour
     public bool isAlive;
 
     private GameObject water;
-    private GameObject waterBg;
     public Vector3 waterBgOffset;
 
     public float lastScoreIncreaseTime;
