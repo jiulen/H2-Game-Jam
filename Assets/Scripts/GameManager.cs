@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Delete)) //resets playerprefs (for debug)
+        if (Input.GetKeyDown(KeyCode.Delete)) //resets playerprefs (for debug) - need restart game to see effect
         {
             PlayerPrefs.DeleteAll();
         }

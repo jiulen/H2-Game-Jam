@@ -808,7 +808,7 @@ MonoBehaviour:
   coinsText: {fileID: 1992937438}
   charsUnlocked: 
   currChar: 0
-  totalChar: 5
+  totalChar: 7
   MenuUI: {fileID: 1221587009}
   GameUI: {fileID: 1173011842}
   DeathUI: {fileID: 750309595}

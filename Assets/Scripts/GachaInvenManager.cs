@@ -19,6 +19,7 @@ public class GachaInvenManager : MonoBehaviour
 
     public GameObject[] buttons; //shld only have 2 types of buttons
     public GameObject[] images;
+    public GameObject[] blackImages;
 
     public TMP_Text nameObj;
 
@@ -50,7 +51,7 @@ public class GachaInvenManager : MonoBehaviour
         }
         else
         {
-            if (GachaInvenUI.activeSelf || !InvenUI.activeSelf)
+            if (!InvenUI.activeSelf)
                 return;
         }
 
@@ -115,30 +116,78 @@ public class GachaInvenManager : MonoBehaviour
 
     void SwitchScreen(int newPage)
     {
-        nameObj.text = names[newPage];
-
-        for (int i = 0; i < pageNum; ++i)
+        if (gachaInven)
         {
-            if (i == newPage)
+            nameObj.text = names[newPage];
+
+            for (int i = 0; i < pageNum; ++i)
             {
-                images[i].SetActive(true);
+                if (i == newPage)
+                {
+                    images[i].SetActive(true);
+                }
+                else
+                {
+                    images[i].SetActive(false);
+                }
+            }
+
+            switch (buttonType[newPage])
+            {
+                case 0:
+                    buttons[0].SetActive(true);
+                    buttons[1].SetActive(false);
+                    break;
+                case 1:
+                    buttons[0].SetActive(false);
+                    buttons[1].SetActive(true);
+                    break;
+            }
+        }
+        else
+        {
+            if (GameManager.instance.charsUnlocked.Contains(newPage))
+            {
+                nameObj.text = names[newPage];
+
+                for (int i = 0; i < pageNum; ++i)
+                {
+                    if (i == newPage)
+                    {
+                        images[i].SetActive(true);
+                    }
+                    else
+                    {
+                        images[i].SetActive(false);
+                    }
+
+                    blackImages[i].SetActive(false);
+                }
+
+                buttons[0].SetActive(true);
+                buttons[1].SetActive(false);
             }
             else
             {
-                images[i].SetActive(false);
-            }
-        }
+                nameObj.text = "?";
 
-        switch (buttonType[newPage])
-        {
-            case 0:
-                buttons[0].SetActive(true);
-                buttons[1].SetActive(false);
-                break;
-            case 1:
+                for (int i = 0; i < pageNum; ++i)
+                {
+                    if (i == newPage)
+                    {
+                        blackImages[i].SetActive(true);
+                    }
+                    else
+                    {
+                        blackImages[i].SetActive(false);
+                    }
+
+                    images[i].SetActive(false);
+                }
+
                 buttons[0].SetActive(false);
                 buttons[1].SetActive(true);
-                break;
+            }
         }
     }
 }
