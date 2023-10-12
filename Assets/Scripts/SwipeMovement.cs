@@ -7,7 +7,9 @@ public class SwipeMovement : MonoBehaviour
 {
     public static SwipeMovement instance;
 
-    public GameObject model;
+    public GameObject[] models;
+    int currentModel;
+
     public TMP_Text Score;
     public Animator animator;
     AnimatorStateInfo animatorStateInfo;
@@ -40,7 +42,11 @@ public class SwipeMovement : MonoBehaviour
             instance = this;
         }
         else
-            Destroy(this);      
+            Destroy(this);
+
+        currentModel = GameManager.instance.currChar;
+        //Enable current char
+        models[GameManager.instance.currChar].SetActive(true);
     }
 
     private void Awake()
@@ -59,6 +65,9 @@ public class SwipeMovement : MonoBehaviour
 
         animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
         animationTime = animatorStateInfo.normalizedTime;
+
+        if (GameManager.instance.state != StateType.gameplay)
+            return;
 
         //Test on PC
         // check if can move in the first place
@@ -90,9 +99,6 @@ public class SwipeMovement : MonoBehaviour
 
             isHopping = false;
 
-            
-
-            RaycastHit hit;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Move("MoveUp");
@@ -125,13 +131,9 @@ public class SwipeMovement : MonoBehaviour
             startTouchPos = touch.position;
         }
 
-        if (GameManager.instance.state != StateType.gameplay)
-            return;
-
         if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
         {
             endTouchPos = touch.position;
-            RaycastHit hit;
             if (Mathf.Abs(touch.deltaPosition.y) > Mathf.Abs(touch.deltaPosition.x))
             {
                 if (endTouchPos.y > startTouchPos.y)
@@ -171,22 +173,22 @@ public class SwipeMovement : MonoBehaviour
         {
             case ("MoveUp"):
                 moveDirVec = Vector3.forward;
-                model.transform.rotation = Quaternion.Euler(0, 0, 0);
+                models[currentModel].transform.rotation = Quaternion.Euler(0, 0, 0);
                 curRotation = 0;
                 break;
             case ("MoveDown"):
                 moveDirVec = -Vector3.forward;
-                model.transform.rotation = Quaternion.Euler(0, 180, 0);
+                models[currentModel].transform.rotation = Quaternion.Euler(0, 180, 0);
                 curRotation = 180;
                 break;
             case ("MoveLeft"):
                 moveDirVec = -Vector3.right;
-                model.transform.rotation = Quaternion.Euler(0, 270, 0);
+                models[currentModel].transform.rotation = Quaternion.Euler(0, 270, 0);
                 curRotation = 270;
                 break;
             case ("MoveRight"):
                 moveDirVec = Vector3.right;
-                model.transform.rotation = Quaternion.Euler(0, 90, 0);
+                models[currentModel].transform.rotation = Quaternion.Euler(0, 90, 0);
                 curRotation = 90;
                 break;
         }
@@ -218,5 +220,15 @@ public class SwipeMovement : MonoBehaviour
         if (hit.collider.tag != "Water")
             return true;
         return false;
+    }
+
+    public void ChangeCharModel(int currChar)
+    {
+        //Disable prev char
+        models[currentModel].SetActive(false);
+        //Enable current char
+        models[currChar].SetActive(true);
+
+        currentModel = currChar;
     }
 }

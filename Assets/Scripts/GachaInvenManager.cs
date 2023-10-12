@@ -220,6 +220,9 @@ public class GachaInvenManager : MonoBehaviour
         //Enable new char
         gachaInvenScript.characters[currentPage].SetActive(true);
 
+        //Change in-game model
+        SwipeMovement.instance.ChangeCharModel(currentPage);
+
         GameManager.instance.currChar = currentPage;
         PlayerPrefs.SetInt("currChar", currentPage);
 
