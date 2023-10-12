@@ -104,8 +104,10 @@ public class LevelManager : MonoBehaviour
                     {
                         if (prevObject.name == "platform1x3")
                             offset.x += maxx;
+                        else if (prevObject.name == "platform1x2")
+                            offset.x += maxx - 1;
                         else
-                            offset.x = UnityEngine.Random.Range(colToIgnore + 1,(int)(offset.x + maxx));
+                            offset.x = UnityEngine.Random.Range(colToIgnore + 1,(int)(offset.x + maxx + 1));
                     }    
                 }
 
