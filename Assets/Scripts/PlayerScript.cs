@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     public bool isAlive;
 
     private GameObject water;
+    private GameObject waterBg;
+    public Vector3 waterBgOffset;
 
     public float lastScoreIncreaseTime;
     private float deathTime;
@@ -28,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         water = GameObject.FindGameObjectWithTag("Water");
+        waterBg = GameObject.Find("WaterBg");
         score = 1;
         isAlive = true;
         lastScoreIncreaseTime = 0f;
@@ -40,7 +43,15 @@ public class PlayerScript : MonoBehaviour
             return;
 
         if (Time.time > lastScoreIncreaseTime + deathTime)
+        {
+            isAlive = false;
             GameManager.instance.SetGameState(StateType.death);
+        }
+
+        if (isAlive)
+        {
+            waterBg.transform.position = new Vector3(player.transform.position.x + waterBgOffset.x, waterBg.transform.position.y, player.transform.position.z + waterBgOffset.z);
+        }
 
         if (SwipeMovement.instance.isHopping)
         {
