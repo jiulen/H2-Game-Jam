@@ -166,6 +166,17 @@ public class GachaInvenManager : MonoBehaviour
 
                 buttons[0].SetActive(true);
                 buttons[1].SetActive(false);
+
+                if (newPage == GameManager.instance.currChar)
+                {
+                    buttons[0].GetComponent<Button>().interactable = false;
+                    buttons[0].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                }
+                else
+                {
+                    buttons[0].GetComponent<Button>().interactable = true;
+                    buttons[0].GetComponent<Image>().color = new Color(1, 1, 1);
+                }
             }
             else
             {
@@ -189,5 +200,13 @@ public class GachaInvenManager : MonoBehaviour
                 buttons[1].SetActive(true);
             }
         }
+    }
+
+    public void ChooseCharacter()
+    {
+        GameManager.instance.currChar = currentPage;
+        PlayerPrefs.SetInt("currChar", currentPage);
+
+        SwitchScreen(currentPage);
     }
 }

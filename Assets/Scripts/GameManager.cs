@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("currChar", currChar);
         }
 
+        //Set player char model here based on currChar
+
         SetGameState(StateType.menu);
     }
     private void Awake()
