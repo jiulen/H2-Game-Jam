@@ -21,6 +21,8 @@ public class GachaInvenManager : MonoBehaviour
     public GameObject[] images;
     public GameObject[] blackImages;
 
+    public GameObject[] characters;
+
     public TMP_Text nameObj;
 
     public string[] names;
@@ -29,10 +31,18 @@ public class GachaInvenManager : MonoBehaviour
     int currentPage = 0;
     int pageNum; //shld be same as num of objects in arrays
 
+    public GachaInvenManager gachaInvenScript;
+
     // Start is called before the first frame update
     void Start()
     {
         pageNum = names.Length;
+
+        if (gachaInven)
+        {
+            //Enable current char
+            characters[GameManager.instance.currChar].SetActive(true);
+        }
     }
 
     private void OnEnable()
@@ -204,9 +214,20 @@ public class GachaInvenManager : MonoBehaviour
 
     public void ChooseCharacter()
     {
+        //Disable prev char
+        gachaInvenScript.characters[GameManager.instance.currChar].SetActive(false);
+
+        //Enable new char
+        gachaInvenScript.characters[currentPage].SetActive(true);
+
         GameManager.instance.currChar = currentPage;
         PlayerPrefs.SetInt("currChar", currentPage);
 
         SwitchScreen(currentPage);
+    }
+
+    public void ShowCharacters(bool show)
+    {
+        images[1].SetActive(show);
     }
 }
