@@ -219,6 +219,8 @@ public class SwipeMovement : MonoBehaviour
         Physics.Raycast(transform.position, transform.TransformDirection(-Vector3.up), out RaycastHit hit);
         if (hit.collider.tag != "Water")
             return true;
+        else
+            rbody.isKinematic = false;
         return false;
     }
 

@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     public ObstacleScript[] obstaclePrefabs;
 
-    private int difficulty;
+    private float difficulty;
 
     private ObstacleScript prevObject;
 
@@ -26,11 +26,13 @@ public class LevelManager : MonoBehaviour
 
     public List<int> availCol;
 
+    public float diffScale;
     public enum TypeObstacle
     {
-        platform1x1,
+        //platform1x1,
         WreckingBall,
-
+        Trapdoor,
+        TypeObstacleSize
     }
 
     public enum SafePlatform
@@ -67,7 +69,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        difficulty = PlayerScript.instance.score;
+        difficulty = Mathf.Log(PlayerScript.instance.score * 0.1f);
 
         if (GameManager.instance.state == StateType.death && !SwipeMovement.instance.rbody.isKinematic && player.transform.position.y < -4)
             SwipeMovement.instance.rbody.isKinematic = true;
@@ -75,13 +77,12 @@ public class LevelManager : MonoBehaviour
 
     public void GenerateLevel()
     {
-        float diffScale = 1 * Mathf.Log10(difficulty);
+        diffScale = 1 * Mathf.Log10(difficulty);
         // generate the next 30 tiles
         Vector3 initialOffset = offset;
         int amtToGenerate = 30 - (int)(offset.z % 30);
 
-        TypeObstacle obstacle;
-        Debug.Log(prevObject.isSafe);
+        //Debug.Log(prevObject.isSafe);
         while (offset.z < initialOffset.z + amtToGenerate)
         {
             if (prevObject.isSafe)
@@ -112,10 +113,26 @@ public class LevelManager : MonoBehaviour
                 }
 
                 int numToGenerate = (int)UnityEngine.Random.Range(1f + diffScale, 3f + diffScale);
+                TypeObstacle obstacle;
+                obstacle = (TypeObstacle)UnityEngine.Random.Range(0, (int)TypeObstacle.TypeObstacleSize);
                 for (int i = 0; i < numToGenerate; ++i)
                 {
-                    obstacle = TypeObstacle.WreckingBall;
-                    CreateObstacle(obstacle.ToString(), offset);
+
+                    switch (obstacle)
+                    {
+                        case TypeObstacle.Trapdoor:
+                            int opp = (UnityEngine.Random.value < 0.5f ? 0 : 1);
+                            if(opp == 0)
+                                CreateObstacle(obstacle.ToString(), 2, 1);
+                            else
+                                CreateObstacle(obstacle.ToString(), 2, 1, true);
+                            break;
+                        default:
+                            CreateObstacle(obstacle.ToString());
+                            break;
+                    }
+                    //obstacle = TypeObstacle.Trapdoor;
+                    //CreateObstacle(obstacle.ToString(), 2, 1);
                 }
             }
             else
@@ -138,7 +155,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void CreateObstacle(string name, Vector3 position)
+    public void CreateObstacle(string name, int amt = 1, int xOffset = 0, bool opp = false)
     {
         ObstacleScript s = Array.Find(obstaclePrefabs, x => x.name == name);
 
@@ -148,15 +165,30 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            int initpos = (int)(s.heightz * 0.5f);
-            offset.z += initpos;
-            GameObject go = Instantiate(s.obstacle, offset, Quaternion.identity);
-            offset.z += (s.heightz - initpos);
-
-
-            prevObject = s;
-
-
+            if(amt == 1)
+            {
+                int initpos = (int)(s.heightz * 0.5f);
+                offset.z += initpos;
+                GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 0, 0));
+                offset.z += (s.heightz - initpos);
+                prevObject = s;
+            }
+            else
+            {
+                int initpos = (int)(s.heightz * 0.5f);
+                offset.z += initpos;
+                GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 0, 0));
+                prevObject = s;
+                offset.x += xOffset;
+                GameObject go1 = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 180, 0));
+                offset.x -= xOffset;
+                offset.z += (s.heightz - initpos);
+                if(opp)
+                {
+                    go.transform.GetChild(0).GetComponent<Obstacle>().isOpen = true;
+                    go1.transform.GetChild(0).GetComponent<Obstacle>().isOpen = true;
+                }
+            }
         }
     }
 

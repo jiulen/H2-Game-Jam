@@ -93,3 +93,11 @@ MonoBehaviour:
     isSafe: 1
     heightz: 1
     widthx: 2
+  - name: Trapdoor
+    obstacle: {fileID: 7776398826792277987, guid: 649b18ebfe1cf7746af7dfd41722ec79, type: 3}
+    isSafe: 0
+    heightz: 1
+    widthx: 2
+  colToIgnore: 0
+  availCol: 
+  diffScale: 0

@@ -10,6 +10,7 @@ public class Obstacle : MonoBehaviour
         water,
         collidable,
         floor,
+        trapdoor,
     }
 
     [SerializeField] ObstacleType obstacleType;
@@ -21,10 +22,13 @@ public class Obstacle : MonoBehaviour
     public Animator animator;
     public GameObject splashPrefab;
 
+    float trapdoorUpdate;
+    float trapdoorDelay = 1.5f;
+    public bool isOpen = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        trapdoorUpdate = Time.time;
     }
 
     // Update is called once per frame
@@ -32,6 +36,37 @@ public class Obstacle : MonoBehaviour
     {
         if (transform.position.z < LevelManager.instance.player.position.z - 8)
             Destroy(gameObject);
+
+        switch(obstacleType)
+        {
+            case ObstacleType.trapdoor:
+                Animator animator = transform.parent.GetComponent<Animator>();
+
+                //if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "TrapdoorClosed")
+                //    gameObject.GetComponent<Collider>().enabled = true;
+                //else
+                //    gameObject.GetComponent<Collider>().enabled = false;
+
+                if (Time.time > (trapdoorUpdate + trapdoorDelay) - (1 * LevelManager.instance.diffScale))
+                {
+                    if (!isOpen)
+                    {
+                        animator.Play("TrapdoorOpening", -1, 0);
+                        gameObject.GetComponent<Collider>().enabled = false;
+                        isOpen = true;
+                    }
+                    else
+                    {
+                        animator.Play("TrapdoorClosing", -1, 0);
+                        gameObject.GetComponent<Collider>().enabled = true;
+                        isOpen = false;
+                    }
+                    trapdoorUpdate = Time.time;
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     public ObstacleType GetObstacleType()
@@ -40,9 +75,9 @@ public class Obstacle : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag != "Player" || obstacleType == ObstacleType.wall || obstacleType == ObstacleType.floor)
+        if (collision.collider.tag != "Player" || obstacleType == ObstacleType.wall || obstacleType == ObstacleType.floor || obstacleType == ObstacleType.trapdoor)
             return;
-
+        SwipeMovement.instance.rbody.constraints = RigidbodyConstraints.None;
         PlayerScript.instance.PlayerWalkDie(collision.collider.transform, transform);
     }
 
