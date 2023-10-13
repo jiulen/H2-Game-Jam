@@ -28,16 +28,30 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        trapdoorUpdate = Time.time;
-    }
+        if (obstacleType == ObstacleType.trapdoor)
+        {
+            if (isOpen)
+            {
+                animator.Play("TrapdoorOpened", -1, 0);
+            }
+            else
+                animator.Play("TrapdoorClosed", -1, 0);
 
+        }
+        trapdoorUpdate = Time.time;
+
+    }
+    private void Awake()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
         if (transform.position.z < LevelManager.instance.player.position.z - 8)
             Destroy(gameObject);
-
-        switch(obstacleType)
+            
+        switch (obstacleType)
         {
             case ObstacleType.trapdoor:
                 Animator animator = transform.parent.GetComponent<Animator>();

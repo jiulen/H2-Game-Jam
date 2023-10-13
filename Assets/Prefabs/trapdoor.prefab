@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleType: 4
-  animator: {fileID: 0}
+  animator: {fileID: 3070707728836828937}
   splashPrefab: {fileID: 0}
+  isOpen: 0
 --- !u!1 &7776398826792277987
 GameObject:
   m_ObjectHideFlags: 0

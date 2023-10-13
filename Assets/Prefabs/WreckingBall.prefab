@@ -102,6 +102,7 @@ MonoBehaviour:
   obstacleType: 2
   animator: {fileID: 0}
   splashPrefab: {fileID: 0}
+  isOpen: 0
 --- !u!54 &2282797329544707379
 Rigidbody:
   m_ObjectHideFlags: 0

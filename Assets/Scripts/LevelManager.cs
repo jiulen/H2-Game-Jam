@@ -24,14 +24,13 @@ public class LevelManager : MonoBehaviour
 
     public int colToIgnore;
 
-    public List<int> availCol;
-
     public float diffScale;
     public enum TypeObstacle
     {
         //platform1x1,
         WreckingBall,
         Trapdoor,
+        SmallLogRamp,
         TypeObstacleSize
     }
 
@@ -97,6 +96,9 @@ public class LevelManager : MonoBehaviour
                         if (prevObject.name == "platform1x3")
                             offset.x += minx;
 
+                        else if (prevObject.name == "platform1x2")
+                            offset.x += minx + 1;
+
                         else
                             offset.x = UnityEngine.Random.Range((int)(offset.x + minx), colToIgnore);
                     }
@@ -126,6 +128,15 @@ public class LevelManager : MonoBehaviour
                             else
                                 CreateObstacle(obstacle.ToString(), 2, 1, true);
                             break;
+
+                        case TypeObstacle.SmallLogRamp:
+                            int opp1 = (UnityEngine.Random.value < 0.5f ? 0 : 1);
+                            if (opp1 == 0)
+                                CreateObstacle(obstacle.ToString(), 1, 0);
+                            else
+                                CreateObstacle(obstacle.ToString(), 1, 0, false, 180);
+                            break;
+
                         default:
                             CreateObstacle(obstacle.ToString());
                             break;
@@ -154,7 +165,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void CreateObstacle(string name, int amt = 1, int xOffset = 0, bool opp = false)
+    public void CreateObstacle(string name, int amt = 1, int xOffset = 0, bool opp = false, int yRotation = 0)
     {
         ObstacleScript s = Array.Find(obstaclePrefabs, x => x.name == name);
 
@@ -168,7 +179,7 @@ public class LevelManager : MonoBehaviour
             {
                 int initpos = (int)(s.heightz * 0.5f);
                 offset.z += initpos;
-                GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 0, 0));
+                GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, yRotation, 0));
                 offset.z += (s.heightz - initpos);
                 prevObject = s;
             }
