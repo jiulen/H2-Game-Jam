@@ -129,7 +129,9 @@ public class LevelManager : MonoBehaviour
                                 CreateObstacle(obstacle.ToString(), 2, 1, true);
                             break;
 
+                            
                         case TypeObstacle.SmallLogRamp:
+                        case TypeObstacle.WreckingBall:
                             int opp1 = (UnityEngine.Random.value < 0.5f ? 0 : 1);
                             if (opp1 == 0)
                                 CreateObstacle(obstacle.ToString(), 1, 0);

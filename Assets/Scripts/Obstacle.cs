@@ -11,6 +11,8 @@ public class Obstacle : MonoBehaviour
         collidable,
         floor,
         trapdoor,
+        wreckingBall,
+        logroll
     }
 
     [SerializeField] ObstacleType obstacleType;
@@ -28,18 +30,26 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (obstacleType == ObstacleType.trapdoor)
+        switch(obstacleType)
         {
-            if (isOpen)
-            {
-                animator.Play("TrapdoorOpened", -1, 0);
-            }
-            else
-                animator.Play("TrapdoorClosed", -1, 0);
-
+            case ObstacleType.trapdoor:
+                if (isOpen)
+                {
+                    animator.Play("TrapdoorOpened", -1, 0);
+                }
+                else
+                    animator.Play("TrapdoorClosed", -1, 0);
+                trapdoorUpdate = Time.time;
+                break;
+            case ObstacleType.wreckingBall:
+                animator.speed *= 1 + UnityEngine.Random.Range(LevelManager.instance.diffScale, LevelManager.instance.diffScale + 0.05f);
+                break;
+            case ObstacleType.logroll:
+                animator.speed *= 1 + UnityEngine.Random.Range(LevelManager.instance.diffScale, LevelManager.instance.diffScale + 0.05f);
+                break;
+            default:
+                break;
         }
-        trapdoorUpdate = Time.time;
-
     }
     private void Awake()
     {
@@ -53,13 +63,11 @@ public class Obstacle : MonoBehaviour
             
         switch (obstacleType)
         {
+            case ObstacleType.wreckingBall:
+                
+                break;
             case ObstacleType.trapdoor:
                 Animator animator = transform.parent.GetComponent<Animator>();
-
-                //if (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "TrapdoorClosed")
-                //    gameObject.GetComponent<Collider>().enabled = true;
-                //else
-                //    gameObject.GetComponent<Collider>().enabled = false;
 
                 if (Time.time > (trapdoorUpdate + trapdoorDelay) - (1 * LevelManager.instance.diffScale))
                 {

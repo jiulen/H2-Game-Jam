@@ -59,7 +59,7 @@ MonoBehaviour:
     heightz: 1
     widthx: 1
   - name: WreckingBall
-    obstacle: {fileID: 4177129456350927956, guid: e0c5ea43ae2156243847dedc40d2ae84, type: 3}
+    obstacle: {fileID: 5989516213982632821, guid: 131434255f3ed6d429e1c330318080f1, type: 3}
     isSafe: 0
     heightz: 1
     widthx: 1
@@ -104,5 +104,4 @@ MonoBehaviour:
     heightz: 1
     widthx: 7
   colToIgnore: 0
-  availCol: 
   diffScale: 0
