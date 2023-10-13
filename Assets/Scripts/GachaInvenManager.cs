@@ -244,4 +244,12 @@ public class GachaInvenManager : MonoBehaviour
     {
         images[1].SetActive(show);
     }
+
+    public void ShowGachaMachine(bool show)
+    {
+        if (gachaInven)
+        {
+            images[0].SetActive(show);
+        }
+    }
 }
