@@ -422,4 +422,20 @@ public class GameManager : MonoBehaviour
         string charUnlockedStr = PlayerPrefs.GetString("charUnlocks") + "," + charIndex.ToString();
         PlayerPrefs.SetString("charUnlocks", charUnlockedStr); //index of each char unlocked will be included in string
     }
+
+    public void PlayClickSound()
+    {
+        int randSound = Random.Range(0, 2);
+        string soundName = "";
+        switch (randSound)
+        {
+            case 0:
+                soundName = "click1";
+                break;
+            case 1:
+                soundName = "click2";
+                break;
+        }
+        AudioManager.Instance.PlaySFX(soundName);
+    }
 }
