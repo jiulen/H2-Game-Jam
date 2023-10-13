@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1173011843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1406,6 +1406,7 @@ GameObject:
   - component: {fileID: 1417501508833790580}
   - component: {fileID: 1848823049102861624}
   - component: {fileID: 5600103313168765345}
+  - component: {fileID: 2807278434766603445}
   m_Layer: 5
   m_Name: TsunamiParent
   m_TagString: Untagged
@@ -1432,7 +1433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1578}
+  m_AnchoredPosition: {x: 0, y: -1950}
   m_SizeDelta: {x: 800, y: 1378}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1848823049102861624
@@ -1463,6 +1464,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &2807278434766603445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702811150986073034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1081b595cd9d17d4984bd3afee13f40e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5600103313168765345}
+  animationTime: 0
 --- !u!1 &2727378684408722550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,10 +3525,10 @@ RectTransform:
   m_Father: {fileID: 6776273694908788932}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.8748, y: 4.9701}
-  m_SizeDelta: {x: 300, y: 109.9443}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 1.231, y: -3.9891}
+  m_SizeDelta: {x: 718.2651, y: 1287.7161}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6776273693270930123
 CanvasRenderer:
@@ -3536,7 +3551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.827451, b: 1, a: 1}
+  m_Color: {r: 0.003921569, g: 0.69411767, b: 0.98039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

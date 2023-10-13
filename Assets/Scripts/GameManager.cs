@@ -210,8 +210,6 @@ public class GameManager : MonoBehaviour
 
             case StateType.death:
                 {
-                    GameUI.SetActive(false);
-                    DeathUI.SetActive(true);
                     CameraScript.instance.moving = false;
                     if (PlayerScript.instance.score > highscore)
                     {
@@ -230,6 +228,14 @@ public class GameManager : MonoBehaviour
     public void GoMainMenuState()
     {
         SetGameState(StateType.menu);
+    }
+    public void TriggerDeathUI()
+    {
+        if (state == StateType.death)
+        {
+            GameUI.SetActive(false);
+            DeathUI.SetActive(true);
+        }
     }
 
     public void Refreseh()

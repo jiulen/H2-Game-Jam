@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
 
     public float lastScoreIncreaseTime;
     private float deathTime;
+    public float tsunamiStartTime;
     void Start()
     {
         if (!instance)
@@ -33,7 +34,7 @@ public class PlayerScript : MonoBehaviour
         isAlive = true;
         lastScoreIncreaseTime = 0f;
         deathTime = 10f;
-
+        tsunamiStartTime = 3f;
     }
     // Update is called once per frame
     void Update()
