@@ -151,9 +151,9 @@ public class LevelManager : MonoBehaviour
             {
 
                 int random = UnityEngine.Random.Range(0, 100);
-                if (random < (5 - diffScale))
-                    CreateObstacleAfter("platform5x5", offset);
-                else if (random >= 5 && random < (15 - diffScale))
+                //if (random < (5 - diffScale))
+                //    CreateObstacleAfter("platform5x5", offset);
+                if (random >= 5 && random < (15 - diffScale))
                 {
                     CreateObstacleAfter("platform3x3", offset);
                 }

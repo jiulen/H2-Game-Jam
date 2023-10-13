@@ -102,6 +102,6 @@ MonoBehaviour:
     obstacle: {fileID: 4837664014199676533, guid: 52894ad4aca81f0419dae290fb94723b, type: 3}
     isSafe: 0
     heightz: 1
-    widthx: 7
+    widthx: 5
   colToIgnore: 0
   diffScale: 0
