@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: 3c81f9da28168b44f88ad9cfed0d5422
+guid: a0101f347c58d7e43bf28b8f5c99ef18
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: bird
-    second: {fileID: 2100000, guid: 72d8f01d228647d4290cab94b85f14b2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: black
-    second: {fileID: 2100000, guid: 637c8323911249e44ae676de58082671, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: glass
-    second: {fileID: 2100000, guid: 39d36cdfaed688241a7d297db5c7055f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lime
-    second: {fileID: 2100000, guid: 1003fd13308300f47a4a2b5e2a93be80, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: red
-    second: {fileID: 2100000, guid: 6f6c3417c9b8cca4babdabb7ebee19e5, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: standardSurface1
-    second: {fileID: 2100000, guid: 88e3dbfde730aad4eb8c948b6beafe72, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: water
-    second: {fileID: 2100000, guid: dc6e4f1cbb8de59488746c355b2cf4b3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: wood
-    second: {fileID: 2100000, guid: bec45ed4baba9fa488a647e4b4af2637, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: yellow
-    second: {fileID: 2100000, guid: 22a034c210f13184983e69e4a2265e72, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

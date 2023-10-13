@@ -151,7 +151,6 @@ public class GachaInvenManager : MonoBehaviour
                     buttons[0].SetActive(true);
                     buttons[1].SetActive(false);
 
-                    Debug.Log("cok");
                     if (GameManager.instance.GetRandomAvailableCharacter() == -1 || GameManager.instance.coins < GameManager.instance.gachaCost)
                     {
                         buttons[0].GetComponent<Button>().interactable = false;
