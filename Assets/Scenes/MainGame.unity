@@ -1245,6 +1245,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e604ad2d8c381564ca6c0379120bf883, type: 3}
   - {fileID: 21300000, guid: 31f0a0e8823ca3446a120be1a403f01c, type: 3}
   - {fileID: 21300000, guid: 8d8092b7ccb4229469e0139f80cc111d, type: 3}
+  fadingImage: {fileID: 2055024037}
+  fadeDuration: 1
+  fadeTimer: 0
 --- !u!1 &1173011842 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1173011842, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}
@@ -2137,6 +2140,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}
+--- !u!114 &2055024037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 485140809901523345, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}
+  m_PrefabInstance: {fileID: 2055024036}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2131936697 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4054099657914044190, guid: 6617c60e2566e98438c2c9e6ef79b0e4, type: 3}

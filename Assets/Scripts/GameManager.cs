@@ -52,6 +52,10 @@ public class GameManager : MonoBehaviour
 
     private Touch touch;
 
+    public Image fadingImage;
+    public float fadeDuration;
+    public float fadeTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -157,6 +161,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (fadeTimer < fadeDuration)
+        {
+            fadeTimer += Time.deltaTime;
+
+            if (fadeTimer >= fadeDuration)
+            {
+                fadeTimer = fadeDuration;
+                fadingImage.raycastTarget = false;
+            }
+
+            fadingImage.color = new Color(fadingImage.color.r, fadingImage.color.g, fadingImage.color.b, 1 - fadeTimer / fadeDuration);
+        }
+
         if (Input.GetKeyDown(KeyCode.Delete)) //resets playerprefs (for debug) - need restart game to see effect
         {
             PlayerPrefs.DeleteAll();
