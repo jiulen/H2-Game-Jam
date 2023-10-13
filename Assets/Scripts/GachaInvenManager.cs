@@ -24,6 +24,7 @@ public class GachaInvenManager : MonoBehaviour
     public GameObject[] characters;
 
     public TMP_Text nameObj;
+    public TMP_Text nameOutlineObj;
 
     public string[] names;
     public int[] buttonType; //index of button
@@ -129,6 +130,7 @@ public class GachaInvenManager : MonoBehaviour
         if (gachaInven)
         {
             nameObj.text = names[newPage];
+            nameOutlineObj.text = names[newPage];
 
             for (int i = 0; i < pageNum; ++i)
             {
@@ -159,6 +161,7 @@ public class GachaInvenManager : MonoBehaviour
             if (GameManager.instance.charsUnlocked.Contains(newPage))
             {
                 nameObj.text = names[newPage];
+                nameOutlineObj.text = names[newPage];
 
                 for (int i = 0; i < pageNum; ++i)
                 {
@@ -191,6 +194,7 @@ public class GachaInvenManager : MonoBehaviour
             else
             {
                 nameObj.text = "?";
+                nameOutlineObj.text = "?";
 
                 for (int i = 0; i < pageNum; ++i)
                 {

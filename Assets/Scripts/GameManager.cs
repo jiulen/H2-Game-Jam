@@ -19,9 +19,14 @@ public class GameManager : MonoBehaviour
     public StateType state;
     public bool resetPLayer;
     public int highscore;
-    public TMP_Text highscoreText;
+    public TMP_Text endHighscoreText;
+    public TMP_Text endHighscoreOutline;
+    public TMP_Text endScoreText;
+    public TMP_Text endScoreOutline;
     public int coins;
     public TMP_Text coinsText;
+    public TMP_Text endCoinsText;
+    public TMP_Text endCoinsOutline;
 
     public List<int> charsUnlocked = new List<int>();
     public int currChar;
@@ -219,6 +224,15 @@ public class GameManager : MonoBehaviour
 
                     PlayerPrefs.SetInt("coins", coins);
                     //PlayerScript.instance.isAlive = false;
+
+                    //Set stuff in death menu
+                    endCoinsOutline.text = coins.ToString();
+                    endCoinsText.text = coins.ToString();
+                    endHighscoreOutline.text = highscore.ToString();
+                    endHighscoreText.text = highscore.ToString();
+                    endScoreOutline.text = PlayerScript.instance.score.ToString();
+                    endScoreText.text = PlayerScript.instance.score.ToString();
+
                     break;
                 }
             default:
