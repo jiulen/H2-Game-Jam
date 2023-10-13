@@ -62,4 +62,15 @@ public class GachaManager : MonoBehaviour
             gachaAnimator.Play("gachafishanim", -1, 0);
         }
     }
+
+    public void ReduceCoins()
+    {
+        GameManager.instance.coins -= GameManager.instance.gachaCost;
+        PlayerPrefs.SetInt("coins", GameManager.instance.coins);
+
+        GameManager.instance.gachaInvenCoinsOutline.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaInvenCoinsText.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaCoinsOutline.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaCoinsText.text = GameManager.instance.coins.ToString();
+    }
 }

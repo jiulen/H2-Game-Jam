@@ -126,7 +126,7 @@ public class GachaInvenManager : MonoBehaviour
         }
     }
 
-    void SwitchScreen(int newPage)
+    public void SwitchScreen(int newPage)
     {
         if (gachaInven)
         {
@@ -151,7 +151,8 @@ public class GachaInvenManager : MonoBehaviour
                     buttons[0].SetActive(true);
                     buttons[1].SetActive(false);
 
-                    if (GameManager.instance.GetRandomAvailableCharacter() == -1)
+                    Debug.Log("cok");
+                    if (GameManager.instance.GetRandomAvailableCharacter() == -1 || GameManager.instance.coins < GameManager.instance.gachaCost)
                     {
                         buttons[0].GetComponent<Button>().interactable = false;
                         buttons[0].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
