@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
         WreckingBall,
         Trapdoor,
         SmallLogRamp,
+        //FlyingFish,
         TypeObstacleSize
     }
 
