@@ -103,5 +103,10 @@ MonoBehaviour:
     isSafe: 0
     heightz: 1
     widthx: 1
+  - name: Coin
+    obstacle: {fileID: 8524599558696774808, guid: 9b4fa880eba822f49b11fbbc99fafe2a, type: 3}
+    isSafe: 0
+    heightz: 0
+    widthx: 0
   colToIgnore: 0
   diffScale: 0

@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
     public int colToIgnore;
 
     public float diffScale;
+
+    ObstacleScript coin;
     public enum TypeObstacle
     {
         //platform1x1,
@@ -61,8 +63,10 @@ public class LevelManager : MonoBehaviour
         difficulty = 1;
         prevObject = Array.Find(obstaclePrefabs, x => x.name == "platform5x5");
         colToIgnore = (UnityEngine.Random.value < 0.5f ? -2 : -1);
+        coin = Array.Find(obstaclePrefabs, x => x.name == "Coin");
+        Debug.Log(coin);
         GenerateLevel();
-        
+
     }
 
     // Update is called once per frame
@@ -191,6 +195,9 @@ public class LevelManager : MonoBehaviour
                 int initpos = (int)(s.heightz * 0.5f);
                 offset.z += initpos;
                 GameObject go = Instantiate(s.obstacle, offset, Quaternion.Euler(0, 0, 0));
+
+                if (UnityEngine.Random.value < 0.1f)
+                    Instantiate(coin.obstacle, new Vector3(offset.x, 0.5f, offset.z), Quaternion.Euler(0, 0, 90));
                 prevObject = s;
                 GameObject go1 = Instantiate(s.obstacle, offset + new Vector3(xOffset,0,0), Quaternion.Euler(0, 180, 0));
                 offset.z += (s.heightz - initpos);
@@ -236,6 +243,8 @@ public class LevelManager : MonoBehaviour
             int initpos = (int)(s.heightz * 0.5f);
             offset.z += initpos;
             GameObject go = Instantiate(s.obstacle, offset, Quaternion.identity);
+            if (UnityEngine.Random.value < 0.3f)
+                Instantiate(coin.obstacle, new Vector3(offset.x, 0.5f, offset.z), Quaternion.Euler(0,0,90));
             offset.z += (s.heightz - initpos);
 
             prevObject = s;
