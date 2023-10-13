@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     public float lastScoreIncreaseTime;
     private float deathTime;
     public float tsunamiStartTime;
+
     void Start()
     {
         if (!instance)

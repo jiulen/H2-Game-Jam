@@ -1554,6 +1554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5600103313168765345}
   animationTime: 0
+  tsunamiDelay: 1.5
+  deadedTime: 0
 --- !u!1 &2727378684408722550
 GameObject:
   m_ObjectHideFlags: 0
@@ -4548,7 +4550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6776273694908788932
 RectTransform:
   m_ObjectHideFlags: 0

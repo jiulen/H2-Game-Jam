@@ -11,6 +11,10 @@ public class TsunamiManager : MonoBehaviour
     bool tsunamiScreening = false;
     bool deathScreened = false;
 
+    public float tsunamiDelay;
+
+    public float deadedTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +27,13 @@ public class TsunamiManager : MonoBehaviour
         {
             if (!tsunamiScreening)
             {
-                tsunamiScreening = true;
-                animator.Play("TsunamiScreen");
+                deadedTime += Time.deltaTime;
+
+                if (deadedTime > tsunamiDelay)
+                {
+                    tsunamiScreening = true;
+                    animator.Play("TsunamiScreen");
+                }
             }
             else if (!deathScreened)
             {
