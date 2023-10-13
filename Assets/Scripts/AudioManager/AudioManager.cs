@@ -25,10 +25,10 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            audioMixerGroup.ClearFloat("MasterVolume");
-            audioMixerGroup.GetFloat("MasterVolume", out masterVol);
-            masterVol += 80f;
-            audioMixerGroup.SetFloat("MasterVolume", -80f + masterVol);
+            //audioMixerGroup.ClearFloat("MasterVolume");
+            //audioMixerGroup.GetFloat("MasterVolume", out masterVol);
+            //masterVol += 80f;
+            //audioMixerGroup.SetFloat("MasterVolume", -80f + masterVol);
             //SFXvolumeSlider.value = sfxSource.volume;
             //BGMvolumeSlider.value = bgmSource.volume;
         }

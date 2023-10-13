@@ -64,7 +64,10 @@ public class Obstacle : MonoBehaviour
         switch (obstacleType)
         {
             case ObstacleType.wreckingBall:
-                
+                if(Vector3.Distance(transform.position, LevelManager.instance.player.position) < 3)
+                {
+
+                }
                 break;
             case ObstacleType.trapdoor:
                 Animator animator = transform.parent.GetComponent<Animator>();
@@ -83,6 +86,7 @@ public class Obstacle : MonoBehaviour
                         gameObject.GetComponent<Collider>().enabled = true;
                         isOpen = false;
                     }
+                    //AudioManager.Instance.PlaySFX("Trapdoor")
                     trapdoorUpdate = Time.time;
                 }
                 break;
@@ -97,18 +101,30 @@ public class Obstacle : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag != "Player" || obstacleType == ObstacleType.wall || obstacleType == ObstacleType.floor || obstacleType == ObstacleType.trapdoor)
+        if (collision.collider.tag != "Player" || obstacleType == ObstacleType.wall || obstacleType == ObstacleType.floor || obstacleType == ObstacleType.trapdoor || GameManager.instance.state == StateType.death)
             return;
         SwipeMovement.instance.rbody.constraints = RigidbodyConstraints.None;
+        AudioManager.Instance.PlaySFX("splash1", transform.position);
         PlayerScript.instance.PlayerWalkDie(collision.collider.transform, transform);
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        GameObject go = Instantiate(splashPrefab, other.transform.position, Quaternion.Euler(-90, 0, 0));
-        Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+        if(other.tag == "Player" && obstacleType != ObstacleType.water)
+        {
+            AudioManager.Instance.PlaySFX("whoosh", other.transform.position);
+            return;
+        }
+  
+       
 
         if (other.tag == "Player")
+        {
+            GameObject go = Instantiate(splashPrefab, other.transform.position, Quaternion.Euler(-90, 0, 0));
+            Destroy(go, go.GetComponent<ParticleSystem>().main.duration);
+            AudioManager.Instance.PlaySFX("splash2", other.transform.position);
             GameManager.instance.SetGameState(StateType.death);
+        }
+
     }
 }
