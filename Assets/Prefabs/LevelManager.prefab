@@ -79,7 +79,7 @@ MonoBehaviour:
     heightz: 3
     widthx: 3
   - name: platform2x3
-    obstacle: {fileID: 1545669914676840202, guid: 35d65781ecd8a7e44adb5b31cf15cb0d, type: 3}
+    obstacle: {fileID: 670586740814865651, guid: a44a463ee6c6e804db3363333d27704f, type: 3}
     isSafe: 1
     heightz: 2
     widthx: 3
@@ -89,7 +89,7 @@ MonoBehaviour:
     heightz: 1
     widthx: 1
   - name: platform1x2
-    obstacle: {fileID: 1545669914676840202, guid: 5e0e1d27c1c8e3d4bb80532f198e16f3, type: 3}
+    obstacle: {fileID: 5910089034144291538, guid: 5e0e1d27c1c8e3d4bb80532f198e16f3, type: 3}
     isSafe: 1
     heightz: 1
     widthx: 2
@@ -98,6 +98,11 @@ MonoBehaviour:
     isSafe: 0
     heightz: 1
     widthx: 2
+  - name: SmallLogRamp
+    obstacle: {fileID: 4837664014199676533, guid: 52894ad4aca81f0419dae290fb94723b, type: 3}
+    isSafe: 0
+    heightz: 1
+    widthx: 7
   colToIgnore: 0
   availCol: 
   diffScale: 0
