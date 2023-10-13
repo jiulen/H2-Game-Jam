@@ -25,6 +25,8 @@ public class TsunamiManager : MonoBehaviour
     {
         if (GameManager.instance.state == StateType.death)
         {
+            if(!GameObject.Find("seawaves1_AudioClip"))
+                AudioManager.Instance.PlaySFX("seawaves1", transform.position);
             if (!tsunamiScreening)
             {
                 deadedTime += Time.deltaTime;

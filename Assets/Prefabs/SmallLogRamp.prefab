@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 437594024050476246}
   - component: {fileID: 437594024050481960}
   - component: {fileID: 437594024050476247}
+  - component: {fileID: 4562617245498382539}
   m_Layer: 0
   m_Name: joint1
   m_TagString: Untagged
@@ -275,6 +276,20 @@ MonoBehaviour:
   animator: {fileID: 666751009798059682}
   splashPrefab: {fileID: 0}
   isOpen: 0
+--- !u!136 &4562617245498382539
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677241535392976666}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7153400966636864550
 GameObject:
   m_ObjectHideFlags: 0
