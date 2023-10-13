@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4333179733404345159}
   - component: {fileID: 8394138568378038679}
   - component: {fileID: 7205476259702923160}
-  - component: {fileID: 8806923927122787575}
   - component: {fileID: 293725371122510894}
+  - component: {fileID: 6303002708355036282}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5308362296678873356}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8524599558696774804}
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5308362296678873356}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 2159703810824169821, guid: e672d66d7f164aa4e877b16bdd41b001, type: 3}
 --- !u!23 &7205476259702923160
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 06e08dee9e5bb4b40af202cf97d8f172, type: 2}
+  - {fileID: 2100000, guid: cb8a81869ab1ea64190d77022615da94, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8806923927122787575
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308362296678873356}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &293725371122510894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +98,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinAnimator: {fileID: 4838127728831891841}
+--- !u!136 &6303002708355036282
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308362296678873356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.010000003
+  m_Height: 0.020000005
+  m_Direction: 1
+  m_Center: {x: 0, y: -4.440892e-16, z: 0}
 --- !u!1 &8524599558696774808
 GameObject:
   m_ObjectHideFlags: 0
