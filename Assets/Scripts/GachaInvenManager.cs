@@ -8,6 +8,7 @@ public class GachaInvenManager : MonoBehaviour
 {
     public GameObject GachaInvenUI;
     public GameObject GachaUI;
+    public GameObject GachaResultUI;
     public GameObject InvenUI;
 
     public bool gachaInven; //if false then is inven
@@ -57,7 +58,7 @@ public class GachaInvenManager : MonoBehaviour
     {
         if (gachaInven)
         {
-            if (!GachaInvenUI.activeSelf || GachaUI.activeSelf || InvenUI.activeSelf)
+            if (!GachaInvenUI.activeSelf || GachaUI.activeSelf || InvenUI.activeSelf || GachaResultUI.activeSelf)
                 return;
         }
         else
@@ -149,6 +150,12 @@ public class GachaInvenManager : MonoBehaviour
                 case 0:
                     buttons[0].SetActive(true);
                     buttons[1].SetActive(false);
+
+                    if (GameManager.instance.GetRandomAvailableCharacter() == -1)
+                    {
+                        buttons[0].GetComponent<Button>().interactable = false;
+                        buttons[0].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                    }
                     break;
                 case 1:
                     buttons[0].SetActive(false);
