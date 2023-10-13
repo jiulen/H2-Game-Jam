@@ -41,5 +41,21 @@ public class GachaResultManager : MonoBehaviour
                 images[i].SetActive(false);
             }
         }
+
+        int randSound = Random.Range(0, 3);
+        string soundName = "";
+        switch (randSound)
+        {
+            case 0:
+                soundName = "gatchaitemgot1";
+                break;
+            case 1:
+                soundName = "gatchaitemgot2";
+                break;
+            case 2:
+                soundName = "gatchaitemgot3";
+                break;
+        }
+        AudioManager.Instance.PlaySFX(soundName);
     }
 }
