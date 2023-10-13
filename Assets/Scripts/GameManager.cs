@@ -28,6 +28,13 @@ public class GameManager : MonoBehaviour
     public TMP_Text endCoinsText;
     public TMP_Text endCoinsOutline;
 
+    public int gachaCost;
+
+    public TMP_Text gachaInvenCoinsText;
+    public TMP_Text gachaInvenCoinsOutline;
+    public TMP_Text gachaCoinsText;
+    public TMP_Text gachaCoinsOutline;
+
     public List<int> charsUnlocked = new List<int>();
     public int currChar;
     public int totalChar;
@@ -89,6 +96,11 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("coins", coins);
         }
         coinsText.text = coins.ToString();
+
+        gachaInvenCoinsOutline.text = coins.ToString();
+        gachaInvenCoinsText.text = coins.ToString();
+        gachaCoinsOutline.text = coins.ToString();
+        gachaCoinsText.text = coins.ToString();
 
         if (PlayerPrefs.HasKey("mute"))
         {
@@ -249,6 +261,11 @@ public class GameManager : MonoBehaviour
                     endHighscoreText.text = highscore.ToString();
                     endScoreOutline.text = PlayerScript.instance.score.ToString();
                     endScoreText.text = PlayerScript.instance.score.ToString();
+
+                    gachaInvenCoinsOutline.text = coins.ToString();
+                    gachaInvenCoinsText.text = coins.ToString();
+                    gachaCoinsOutline.text = coins.ToString();
+                    gachaCoinsText.text = coins.ToString();
 
                     break;
                 }

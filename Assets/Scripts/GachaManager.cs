@@ -13,6 +13,8 @@ public class GachaManager : MonoBehaviour
     public float waitTime;
     public float waitTimer;
 
+    public GachaResultManager gachaResultManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,14 +41,14 @@ public class GachaManager : MonoBehaviour
 
             if (animationTime > 1)
             {
+                gachaResultManager.GetCharacter();
+
                 GameManager.instance.OpenGachaResult(true);
                 GameManager.instance.OpenGacha(false);
 
                 PrepareAnim(false);
             }
         }
-
-
     }
 
     public void PrepareAnim(bool prepare)
@@ -58,8 +60,17 @@ public class GachaManager : MonoBehaviour
             waiting = true;
             gachaAnimator.speed = 0;
             gachaAnimator.Play("gachafishanim", -1, 0);
-
-            Debug.Log("b");
         }
+    }
+
+    public void ReduceCoins()
+    {
+        GameManager.instance.coins -= GameManager.instance.gachaCost;
+        PlayerPrefs.SetInt("coins", GameManager.instance.coins);
+
+        GameManager.instance.gachaInvenCoinsOutline.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaInvenCoinsText.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaCoinsOutline.text = GameManager.instance.coins.ToString();
+        GameManager.instance.gachaCoinsText.text = GameManager.instance.coins.ToString();
     }
 }
