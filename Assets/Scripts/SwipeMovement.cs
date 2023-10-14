@@ -135,24 +135,25 @@ public class SwipeMovement : MonoBehaviour
         if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
         {
             endTouchPos = touch.position;
-            if (Mathf.Abs(touch.deltaPosition.y) > Mathf.Abs(touch.deltaPosition.x))
+            Vector2 touchDiff = endTouchPos - startTouchPos;
+            if (Mathf.Abs(touchDiff.y) > Mathf.Abs(touchDiff.x))
             {
-                if (endTouchPos.y > startTouchPos.y)
+                if (touchDiff.y > 0)
                 {
                     Move("MoveUp");
                 }
-                else if (endTouchPos.y < startTouchPos.y)
+                else if (touchDiff.y < 0)
                 {
                     Move("MoveDown");
                 }
             }
-            else if (Mathf.Abs(touch.deltaPosition.y) < Mathf.Abs(touch.deltaPosition.x))
+            else if (Mathf.Abs(touchDiff.y) < Mathf.Abs(touchDiff.x))
             {
-                if (endTouchPos.x > startTouchPos.x)
+                if (touchDiff.x > 0)
                 {
                     Move("MoveRight");
                 }
-                else if (endTouchPos.x < startTouchPos.x)
+                else if (touchDiff.x < 0)
                 {
                     Move("MoveLeft");
                 }
