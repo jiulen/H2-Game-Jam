@@ -122,7 +122,7 @@ public class SwipeMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 if (animationTime > 1) Move("MoveLeft");
-                else nextDir = "MoveDown";
+                else nextDir = "MoveLeft";
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
