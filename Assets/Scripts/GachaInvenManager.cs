@@ -35,6 +35,8 @@ public class GachaInvenManager : MonoBehaviour
 
     public GachaInvenManager gachaInvenScript;
 
+    public bool swipeEnabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -90,9 +92,10 @@ public class GachaInvenManager : MonoBehaviour
         if (touch.phase == TouchPhase.Began)
         {
             startTouchPos = touch.position;
+            swipeEnabled = true;
         }
 
-        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended))
+        if (Input.touchCount > 0 && touch.phase == TouchPhase.Ended && swipeEnabled)
         {
             endTouchPos = touch.position;
             if (endTouchPos.x > startTouchPos.x)
@@ -100,12 +103,14 @@ public class GachaInvenManager : MonoBehaviour
                 SetPage(currentPage - 1);
                 SwitchScreen(currentPage);
                 pageAnimator.Play("SwipeRight", -1, 0);
+                Debug.Log("SwipeRight");
             }
             else if (endTouchPos.x < startTouchPos.x)
             {
                 SetPage(currentPage + 1);
                 SwitchScreen(currentPage);
                 pageAnimator.Play("SwipeLeft", -1, 0);
+                Debug.Log("SwipeLeft");
             }
         }
     }
@@ -251,5 +256,10 @@ public class GachaInvenManager : MonoBehaviour
         {
             images[0].SetActive(show);
         }
+    }
+
+    public void DisableSwipe()
+    {
+        swipeEnabled = false;
     }
 }
