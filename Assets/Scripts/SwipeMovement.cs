@@ -35,6 +35,8 @@ public class SwipeMovement : MonoBehaviour
 
     bool startTap = false;
 
+    string nextDir = "";
+
     //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
@@ -135,7 +137,7 @@ public class SwipeMovement : MonoBehaviour
             startTap = true; //only need do when touch first time
         }
 
-        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive && startTap)
+        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && /*animationTime > 1 &&*/ PlayerScript.instance.isAlive && startTap)
         {
             endTouchPos = touch.position;
             Vector2 touchDiff = endTouchPos - startTouchPos;
@@ -143,27 +145,41 @@ public class SwipeMovement : MonoBehaviour
             {
                 if (touchDiff.y > 0)
                 {
-                    Move("MoveUp");
+                    if (animationTime > 1) Move("MoveUp");
+                    else nextDir = "MoveUp";
                 }
                 else if (touchDiff.y < 0)
                 {
-                    Move("MoveDown");
+                    if (animationTime > 1) Move("MoveDown");
+                    else nextDir = "MoveDown";
                 }
             }
             else if (Mathf.Abs(touchDiff.y) < Mathf.Abs(touchDiff.x))
             {
                 if (touchDiff.x > 0)
                 {
-                    Move("MoveRight");
+                    if (animationTime > 1) Move("MoveRight");
+                    else nextDir = "MoveRight";
                 }
                 else if (touchDiff.x < 0)
                 {
-                    Move("MoveLeft");
+                    if (animationTime > 1) Move("MoveLeft");
+                    else nextDir = "MoveLeft";
                 }
             }        
             else
             {
-                Move("MoveUp");
+                if (animationTime > 1) Move("MoveUp");
+                else nextDir = "MoveUp";
+            }
+        }
+
+        if (animationTime > 1 && PlayerScript.instance.isAlive)
+        {
+            if (nextDir != "")
+            {
+                Move(nextDir);
+                nextDir = "";
             }
         }
     }
