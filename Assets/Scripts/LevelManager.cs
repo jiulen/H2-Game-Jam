@@ -73,6 +73,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         difficulty = Mathf.Log(PlayerScript.instance.score * 0.1f);
+        difficulty = Mathf.Max(1, difficulty); //min difficulty is 1
 
         if (GameManager.instance.state == StateType.death && !SwipeMovement.instance.rbody.isKinematic && player.transform.position.y < -4)
             SwipeMovement.instance.rbody.isKinematic = true;
