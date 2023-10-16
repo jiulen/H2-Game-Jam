@@ -33,6 +33,8 @@ public class SwipeMovement : MonoBehaviour
 
     public int curRotation;
 
+    bool startTap = false;
+
     //private Rigidbody rbody;
     // Start is called before the first frame update
     void Start()
@@ -130,9 +132,10 @@ public class SwipeMovement : MonoBehaviour
         if (touch.phase == TouchPhase.Began)
         {
             startTouchPos = touch.position;
+            startTap = true; //only need do when touch first time
         }
 
-        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive)
+        if (Input.touchCount > 0 && (touch.phase == TouchPhase.Ended) && animationTime > 1 && PlayerScript.instance.isAlive && startTap)
         {
             endTouchPos = touch.position;
             Vector2 touchDiff = endTouchPos - startTouchPos;
