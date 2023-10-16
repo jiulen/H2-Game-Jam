@@ -103,26 +103,33 @@ public class SwipeMovement : MonoBehaviour
             //}
 
             isHopping = false;
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Move("MoveUp");
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                Move("MoveDown");
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                Move("MoveLeft");
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                Move("MoveRight");
-            }
         }
         else if (PlayerScript.instance.isAlive)
             isHopping = true;
+
+        if (PlayerScript.instance.isAlive)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (animationTime > 1) Move("MoveUp");
+                else nextDir = "MoveUp";
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (animationTime > 1) Move("MoveDown");
+                else nextDir = "MoveDown";
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (animationTime > 1) Move("MoveLeft");
+                else nextDir = "MoveDown";
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (animationTime > 1) Move("MoveRight");
+                else nextDir = "MoveRight";
+            }
+        }
 
 
         //Mobile controls
