@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plank1m
       objectReference: {fileID: 0}
+    - target: {fileID: 6167856490150185075, guid: 5d27146f2f37ca44eaec20d87f978f19, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b31955bed1e78f04aae4f2033d70509b, type: 2}
     - target: {fileID: 6716182805401860521, guid: 5d27146f2f37ca44eaec20d87f978f19, type: 3}
       propertyPath: m_RootOrder
       value: 0
